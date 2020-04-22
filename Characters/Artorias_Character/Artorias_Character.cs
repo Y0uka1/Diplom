@@ -8,9 +8,9 @@ public class Artorias_Character : ICharacterStats
 
     public System.Type type { get; set; } = typeof(ArtoriasCharGObject);
     public ICharObject link { get; set; }
-    public double healthPoints { get ; set; }
+    public double maxHealthPoints { get ; set; }
     public double curHealthPoints { get; set; }
-    public double concentrationPoints { get; set; }
+    public double maxConcentrationPoints { get; set; }
     public double armor { get; set; }
     public double baseDamage { get; set; }
     public CharacterType charType { get; set; }
@@ -19,6 +19,11 @@ public class Artorias_Character : ICharacterStats
 
     public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
     public GameObject gObject { get; set; }
+    public double curConcentrationPoints { get; set ; }
+    public double curArmor { get ; set ; }
+    public double curDamage { get ; set ; }
+    public double curSpeed { get; set ; }
+    public double morale { get; set ; }
 
     public bool skillSelected;
 
@@ -26,9 +31,9 @@ public class Artorias_Character : ICharacterStats
 
     public Artorias_Character()
     {
-        healthPoints = 100;
-        curHealthPoints = healthPoints;
-        concentrationPoints = 100;
+        maxHealthPoints = 100;
+        curHealthPoints = maxHealthPoints;
+        maxConcentrationPoints = 100;
         armor = 10;
         baseDamage = 15;
         baseSpeed = 13;

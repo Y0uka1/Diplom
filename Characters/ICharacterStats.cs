@@ -6,13 +6,18 @@ public interface ICharacterStats
 {
      System.Type type { get; set; }
      ICharObject link { get; set; }
-     double healthPoints { get; set; }
+     double maxHealthPoints { get; set; }
      double curHealthPoints { get; set; }
-     double concentrationPoints { get; set; }
+     double maxConcentrationPoints { get; set; }
+     double curConcentrationPoints { get; set; }
      double armor { get; set; }
+     double curArmor { get; set; }
      double baseDamage { get; set; }
+     double curDamage { get; set; }
      CharacterType charType { get; set; }
      double baseSpeed { get; set; }
+     double curSpeed { get; set; }
+     double morale { get; set; }
      void TakeDamage(double dmg);
      void Death();
      void Skill_1();

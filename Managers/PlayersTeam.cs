@@ -9,7 +9,22 @@ public  class PlayersTeam : MonoBehaviour, IManager
 
     public  ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
 
-   
+    public int TorchLight { 
+        get { return TorchLight; } 
+        set {
+            if (value > 100)
+            {
+                TorchLight = 100;
+            }else if(value < 0)
+            {
+                TorchLight = 0;
+            }
+            else
+            {
+                TorchLight = value;
+            }
+        }
+    }
 
     public  void Initialize()
     {

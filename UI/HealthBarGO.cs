@@ -21,7 +21,7 @@ public class HealthBarGO:MonoBehaviour
     {
         Debug.Log(character.curHealthPoints);
         float temp;
-        temp = (float)character.curHealthPoints / (float)character.healthPoints ;
+        temp = (float)character.curHealthPoints / (float)character.maxHealthPoints ;
         hBarValue.ValueChange(Mathf.Clamp(temp,0,1));
     }
 

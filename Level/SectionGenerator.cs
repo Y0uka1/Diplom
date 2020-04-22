@@ -23,9 +23,10 @@ public class SectionGenerator : MonoBehaviour
             BoxCollider2D collider = temp.AddComponent<BoxCollider2D>();
             collider.size = new Vector2(6, 6);
             collider.isTrigger = true;
-            temp.layer = 2;
-            temp.AddComponent<SectionEvent>().Initialize();
+            //temp.layer = 2;
+            SectionEvent se = temp.AddComponent<SectionEvent>();
             temp.transform.position = new Vector3(curPosition.x + 6.2f, curPosition.y);
+            se.Initialize();
             curPosition = temp.transform.position;
         }
     }

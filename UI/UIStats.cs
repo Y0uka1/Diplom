@@ -18,7 +18,7 @@ public class UIStats : MonoBehaviour
     private void OnTurnChanges()
     {
         character = MainManager.battleManager.currentChar;
-        statsText = $"HP:{character.curHealthPoints}/{character.healthPoints}\t Armor:{character.armor} \nCP:{character.concentrationPoints}\nDamage:{character.baseDamage}\nSpeed:{character.baseSpeed}";
+        statsText = $"HP:{character.curHealthPoints}/{character.maxHealthPoints}\t Armor:{character.armor} \nCP:{character.maxConcentrationPoints}\nDamage:{character.baseDamage}\nSpeed:{character.baseSpeed}";
         stats.text = statsText;
     }
 }

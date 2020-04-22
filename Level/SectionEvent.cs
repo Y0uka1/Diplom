@@ -13,33 +13,69 @@ enum EventType
 
 public class SectionEvent : MonoBehaviour
 {
-    [SerializeField] EventType eventType=EventType.Simple;
+    [SerializeField]  EventType eventType;
+    ISectionEventType sectionEventType;
+    System.Type[] lootEventType= { typeof(Event) };
+    System.Type[] battleEventType = { typeof(Event) };
+    System.Type[] TrapEventType = { typeof(Event) };
+    
+
+
     bool isActive=true;
     public void Initialize()
     {
-        int randResult = Random.Range(0,2);
-        if (randResult == 1)
+            eventType = (EventType)Random.Range(0,4);
+
+            GenerateEventType();
+    }
+
+    private void GenerateEventType()
+    {
+        switch (eventType)
         {
-            eventType = (EventType)Random.Range(0,3);
-        }    
+            case EventType.Battle:
+                 {
+                    sectionEventType = this.gameObject.AddComponent<BattleEvent>();
+                    break;
+                 }
+
+            case EventType.Loot:
+                {
+                    sectionEventType = this.gameObject.AddComponent<LootBagEvent>();
+                    break;
+                }
+            case EventType.Trap:
+                {
+                    sectionEventType = this.gameObject.AddComponent<SimpleEvent>();
+                    break;
+                }
+            case EventType.Simple:
+                {
+                    sectionEventType = this.gameObject.AddComponent<SimpleEvent>();
+                    break;
+                }
+
+        }
+
+        sectionEventType.Initialize();
+      /*  if (sectionEventType.interactObject != null)
+        {
+            sectionEventType.interactObject.transform.position = this.gameObject.transform.position;
+        }*/
     }
 
-    void GenerateEventType()
+    private void OnMouseDown()
     {
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
+        Debug.Log("123");
+        sectionEventType.OnInteract();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Enter");
+
         if (collision.gameObject.tag == "PlayerTeam")
         {
-            Debug.Log(eventType.ToString());
+            sectionEventType.TriggerEntered();
         }
     }
 

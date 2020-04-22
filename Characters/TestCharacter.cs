@@ -7,9 +7,9 @@ public class TestCharacter :  ICharacterStats
 {
     public System.Type type { get; set; } = typeof(TestCharGObject);
     public ICharObject link { get; set; }
-    public double healthPoints { get; set; } = 10;
+    public double maxHealthPoints { get; set; } = 10;
     public double curHealthPoints { get; set; }
-    public double concentrationPoints { get; set; } = 10;
+    public double maxConcentrationPoints { get; set; } = 10;
     public double armor { get; set; } = 0.5f;
     public double baseDamage { get; set; } = 2;
     public double baseSpeed { get; set; } = 2;
@@ -18,7 +18,11 @@ public class TestCharacter :  ICharacterStats
     
 
     public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
-
+    public double curConcentrationPoints { get ; set; }
+    public double curArmor { get; set; }
+    public double curDamage { get ; set ; }
+    public double curSpeed { get ; set ; }
+    public double morale { get ; set ; }
 
     public bool skillSelected;
 
@@ -26,9 +30,9 @@ public class TestCharacter :  ICharacterStats
 
     public TestCharacter()
     {
-        healthPoints = 10;
-        curHealthPoints = healthPoints;
-        concentrationPoints = 50;
+        maxHealthPoints = 10;
+        curHealthPoints = maxHealthPoints;
+        maxConcentrationPoints = 50;
         armor = 11;
         baseDamage = 16;
         baseSpeed = 1;
