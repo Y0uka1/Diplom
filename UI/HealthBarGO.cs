@@ -13,15 +13,14 @@ public class HealthBarGO:MonoBehaviour
     {
 
             hBar = Instantiate(Resources.Load<GameObject>("Prefabs/HealthBar"));
+            hBar.transform.SetParent(GameObject.FindGameObjectWithTag("PlayerTeam").transform);
             hBarValue = hBar.GetComponentInChildren<HealthBarValue>();
             MainManager.battleManager.OnTurnChangesEvent += ValueRefresh;
         
     }
     public void ValueRefresh()
     {
-        Debug.Log(character.curHealthPoints);
-        float temp;
-        temp = (float)character.curHealthPoints / (float)character.maxHealthPoints ;
+        float temp = (float)character.curHealthPoints / (float)character.maxHealthPoints ;
         hBarValue.ValueChange(Mathf.Clamp(temp,0,1));
     }
 

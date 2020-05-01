@@ -15,7 +15,7 @@ public class TeamBuilder : MonoBehaviour
     public static event ActivePlaceHolder Activate;
     // public static List<GameObject> characterList;
     Button button;
-
+    public static string loadLevelName;
 
     private void Start()
     {
@@ -34,7 +34,7 @@ public class TeamBuilder : MonoBehaviour
 
     public void TeamReady()
     {
-        placeholders = FindObjectsOfType<Placeholder>();
+        //placeholders = FindObjectsOfType<Placeholder>();
 
         foreach (var i in placeholders)
         {
@@ -43,7 +43,7 @@ public class TeamBuilder : MonoBehaviour
 
         MainManager.playersTeam.team = team;
 
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(loadLevelName);
     }
 
     

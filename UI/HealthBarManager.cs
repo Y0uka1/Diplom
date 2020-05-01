@@ -21,25 +21,28 @@ public class HealthBarManager : MonoBehaviour , IManager
         hBarList = new HealthBarGO[8];
         for(int i = 0; i < 4; i++)
         {
-            hBarList[i] = Instantiate(new GameObject().AddComponent<HealthBarGO>());
+            hBarList[i] = new GameObject().AddComponent<HealthBarGO>();
             hBarList[i].Initialize();
 
             hBarList[i].character = MainManager.playersTeam.team[i];
             hBarList[i].SetPosition();
            
         }
-        for (int i = 0; i < 4; i++)
-        {
-            hBarList[i+4] = Instantiate(new GameObject().AddComponent<HealthBarGO>());
-            hBarList[i+4].Initialize();
-            hBarList[i+4].character = MainManager.enemyTeam.team[i];
-           
-            hBarList[i+4].SetPosition();
-        }
+       
         status = ManagerStatus.Initialized;
     }
 
-   
+   public void InitializeEnemyHBar()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            hBarList[i + 4] = new GameObject().AddComponent<HealthBarGO>();
+            hBarList[i + 4].Initialize();
+            hBarList[i + 4].character = MainManager.enemyTeam.team[i];
+
+            hBarList[i + 4].SetPosition();
+        }
+    }
     private void Update()
     {
        /* float curH = (float)character.healthPoints / ((float)character.curHealthPoints * 100);

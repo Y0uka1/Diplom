@@ -5,8 +5,9 @@ using UnityEngine;
 public class LootBagEvent :MonoBehaviour,  ISectionEventType
 {
    public GameObject interactObject { get; set; }
-   
 
+    public bool isActivated { get; set; } = false;
+    public bool isFinded { get; set; } = false;
     public void Initialize()
     {
         //interactObject = GetComponent<GameObject>();
@@ -17,8 +18,27 @@ public class LootBagEvent :MonoBehaviour,  ISectionEventType
 
     public void OnInteract()
     {
-        Debug.Log("+Money");
+        if (isActivated == false)
+        {
+            MainManager.inventory.ResAdd(ResourceTypes.Money, 100);
+            Debug.Log(MainManager.inventory.availableResources[ResourceTypes.Money]);
+            isActivated = true;
+        }
     }
 
-    public void TriggerEntered() { }
+    public void TriggerEntered()
+    {
+        if (isFinded == false)
+        {
+            TorchAndMoraleLowering();
+            isFinded = true;
+        }
+    }
+
+    public void TorchAndMoraleLowering()
+    {
+        int temp = MainManager.playersTeam.TorchLight;
+        temp -= 7;
+        MainManager.playersTeam.TorchLight = temp;
+    }
 }

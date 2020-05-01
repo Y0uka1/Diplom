@@ -14,6 +14,7 @@ public class MainManager : MonoBehaviour, IManager
     public static EnemyTeam enemyTeam;
     public static SkillExecute skillManager;
     public static UIManager ui;
+    public static InventoryManager inventory;
     void Awake()
     {
        
@@ -29,6 +30,7 @@ public class MainManager : MonoBehaviour, IManager
         playersTeam = GetComponent<PlayersTeam>();
         enemyTeam = GetComponent<EnemyTeam>();
         ui = GetComponent<UIManager>();
+        inventory = GetComponent<InventoryManager>();
         managers = new List<IManager>();
         
        // managers.Add(battleManager);
@@ -36,6 +38,7 @@ public class MainManager : MonoBehaviour, IManager
        // managers.Add(ui);
         managers.Add(playersTeam);
         managers.Add(enemyTeam);
+        managers.Add(inventory);
         Initialize();
 
         DontDestroyOnLoad(this);

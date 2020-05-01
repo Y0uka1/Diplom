@@ -17,6 +17,7 @@ public class Placeholder : MonoBehaviour, IPointerDownHandler
         placeholderImage =this.gameObject.transform.GetChild(0).GetComponent<Image>();
         placeholderImage.color = new Color(255, 255, 255, 0);
         TeamBuilder.Activate += OnPlaceholderActivate;
+        TeamBuilder.placeholders[index] = this;
     }
 
     private void OnPlaceholderActivate()

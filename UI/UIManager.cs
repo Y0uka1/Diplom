@@ -17,11 +17,23 @@ public class UIManager: MonoBehaviour, IManager
         feed = FindObjectOfType<BattleFeed>();
         turnPointer = FindObjectOfType<TurnPointer>();
         healthBar = GetComponent<HealthBarManager>();
+       // feed.Initialize();
+       // stats.Initialize();
+       // turnPointer.Initialize();
+        //healthBar.Initialize();
+        status = ManagerStatus.Initialized;
+        Debug.Log("UI manager onine");
+    }
+
+    public void InitializeCommonUI()
+    {
+        healthBar.Initialize();
+    }
+
+    public void InitializeBattleUI()
+    {
         feed.Initialize();
         stats.Initialize();
         turnPointer.Initialize();
-        healthBar.Initialize();
-        status = ManagerStatus.Initialized;
-        Debug.Log("UI manager onine");
     }
 }

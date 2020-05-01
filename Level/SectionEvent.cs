@@ -66,7 +66,6 @@ public class SectionEvent : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("123");
         sectionEventType.OnInteract();
     }
 
