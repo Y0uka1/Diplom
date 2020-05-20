@@ -15,7 +15,7 @@ public class MainManager : MonoBehaviour, IManager
     public static SkillExecute skillManager;
     public static UIManager ui;
     public static InventoryManager inventory;
-
+    public static TeamBuilder teamBuilder;
     public static CharactersSave charSave;
 
     void Awake()
@@ -26,7 +26,8 @@ public class MainManager : MonoBehaviour, IManager
 
         //  enemyTeam = new ICharObject[4];
 
-        charSave = ScriptableObject.CreateInstance(typeof(CharactersSave)) as CharactersSave;
+        
+        
 
         battleManager = GetComponent<BattleManager>();
         skillManager = GetComponent<SkillExecute>();
@@ -34,6 +35,7 @@ public class MainManager : MonoBehaviour, IManager
         enemyTeam = GetComponent<EnemyTeam>();
         ui = GetComponent<UIManager>();
         inventory = GetComponent<InventoryManager>();
+        teamBuilder = ScriptableObject.CreateInstance(typeof(TeamBuilder)) as TeamBuilder;
         managers = new List<IManager>();
         
        // managers.Add(battleManager);
@@ -42,6 +44,7 @@ public class MainManager : MonoBehaviour, IManager
         managers.Add(playersTeam);
         managers.Add(enemyTeam);
         managers.Add(inventory);
+        managers.Add(teamBuilder);
         Initialize();
 
         DontDestroyOnLoad(this);
@@ -58,7 +61,11 @@ public class MainManager : MonoBehaviour, IManager
         {
             temp.Initialize();
         }
-        Status=ManagerStatus.Initialized;
+
+        charSave = ScriptableObject.CreateInstance(typeof(CharactersSave)) as CharactersSave;
+        charSave.LoadData();
+
+        Status =ManagerStatus.Initialized;
         status = ManagerStatus.Initialized;
     }
 

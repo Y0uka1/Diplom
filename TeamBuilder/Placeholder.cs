@@ -16,13 +16,13 @@ public class Placeholder : MonoBehaviour, IPointerDownHandler
     {
         placeholderImage =this.gameObject.transform.GetChild(0).GetComponent<Image>();
         placeholderImage.color = new Color(255, 255, 255, 0);
-        TeamBuilder.Activate += OnPlaceholderActivate;
-        TeamBuilder.placeholders[index] = this;
+        MainManager.teamBuilder.Activate += OnPlaceholderActivate;
+        MainManager.teamBuilder.placeholders[index] = this;
     }
 
     private void OnPlaceholderActivate()
     {
-        if (TeamBuilder.activePlaceholder != this)
+        if (MainManager.teamBuilder.activePlaceholder != this)
         {
             placeholderImage.color = new Color(255, 255, 255, 0);
         }
@@ -41,8 +41,8 @@ public class Placeholder : MonoBehaviour, IPointerDownHandler
             TeamBuilder.tempCharacter = null;
         }*/
         //TeamBuilder.characterList.content.
-        TeamBuilder.activePlaceholder = this;
-        TeamBuilder.PlaceholderActivate();
+        MainManager.teamBuilder.activePlaceholder = this;
+        MainManager.teamBuilder.PlaceholderActivate();
        
 
     }

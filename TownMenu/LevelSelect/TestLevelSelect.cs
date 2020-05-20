@@ -15,6 +15,6 @@ public class TestLevelSelect : MonoBehaviour
 
     private void LevelLoad()
     {
-        TeamBuilder.loadLevelName = "TestLevel";
+        MainManager.teamBuilder.loadLevelName = "TestLevel";
     }
 }

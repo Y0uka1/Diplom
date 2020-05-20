@@ -5,29 +5,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TeamBuilder : MonoBehaviour
+public class TeamBuilder : ScriptableObject, IManager
 {
    // public static ICharacterStats tempCharacter { get; set; }
-    public static ICharacterStats[] team;
-    public static Placeholder[] placeholders;
-    public static Placeholder activePlaceholder;
+    public  ICharacterStats[] team;
+    public  Placeholder[] placeholders;
+    public  Placeholder activePlaceholder;
     public delegate void ActivePlaceHolder();
-    public static event ActivePlaceHolder Activate;
+    public  event ActivePlaceHolder Activate;
     // public static List<GameObject> characterList;
-    Button button;
-    public static string loadLevelName;
+    //Button button;
+    public  string loadLevelName;
+
+    public ManagerStatus status { get; set ; }
 
     private void Start()
     {
-        team = new ICharacterStats[4];
-        placeholders = new Placeholder[4];
+        Initialize();
         // characterList = new List<GameObject>();
-        button = GetComponent<Button>();
-        button.onClick.AddListener(TeamReady);
+      //  button = GetComponent<Button>();
+      //  button.onClick.AddListener(TeamReady);
         
     }
 
-    public static void PlaceholderActivate()
+    public void PlaceholderActivate()
     {
         Activate.Invoke();
     }
@@ -46,5 +47,9 @@ public class TeamBuilder : MonoBehaviour
         SceneManager.LoadScene(loadLevelName);
     }
 
-    
+    public void Initialize()
+    {
+        team = new ICharacterStats[4];
+        placeholders = new Placeholder[4];
+    }
 }

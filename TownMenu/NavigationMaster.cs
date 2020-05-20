@@ -16,6 +16,13 @@ public class NavigationMaster : MonoBehaviour
     void Start()
     {
         detailsList = new List<GameObject>();
+
+        teamBuilderMaster = GameObject.Find("AllyListMaster").GetComponent<Button>();
+        teamBuilderDetail = GameObject.Find("AllyListDetail");
+
+        levelSelectMaster = GameObject.Find("LevelSelectMaster").GetComponent<Button>();
+        levelSelectDetail = GameObject.Find("LevelSelectDetail");
+
         detailsList.Add(teamBuilderDetail);
         detailsList.Add(levelSelectDetail);
         teamBuilderMaster.onClick.AddListener(TeamBuilderMasterClicked);
