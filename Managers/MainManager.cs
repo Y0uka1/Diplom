@@ -15,15 +15,18 @@ public class MainManager : MonoBehaviour, IManager
     public static SkillExecute skillManager;
     public static UIManager ui;
     public static InventoryManager inventory;
+
+    public static CharactersSave charSave;
+
     void Awake()
     {
-       
 
-       // playersTeam = new ICharObject[4];
 
-      //  enemyTeam = new ICharObject[4];
+        // playersTeam = new ICharObject[4];
 
-        
+        //  enemyTeam = new ICharObject[4];
+
+        charSave = ScriptableObject.CreateInstance(typeof(CharactersSave)) as CharactersSave;
 
         battleManager = GetComponent<BattleManager>();
         skillManager = GetComponent<SkillExecute>();

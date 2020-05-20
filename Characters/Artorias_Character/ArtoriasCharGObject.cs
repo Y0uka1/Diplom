@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ArtoriasCharGObject : ICharObject
 {
-    public ICharacterStats character;
-    public string prefabWay  = "Prefabs/ArtoriasPrefab";
+     string prefabWay  = "Prefabs/ArtoriasPrefab";
     void Start()
     {
         

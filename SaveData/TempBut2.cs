@@ -3,26 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TempBut : MonoBehaviour
+public class TempBut2 : MonoBehaviour
 {
     Button button;
+   
     void Start()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
-       
+        
     }
-
 
     void OnClick()
     {
-       MainManager.charSave.SaveData();
-        
-    }
+        MainManager.charSave.LoadData();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

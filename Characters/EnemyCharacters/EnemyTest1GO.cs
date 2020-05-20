@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyTest1GO : ICharObject
 {
-    public ICharacterStats character;
-
 
     private void OnMouseDown()
     {

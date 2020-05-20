@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class LamiaCharGO : ICharObject
 {
-    public ICharacterStats character;
-
     private void OnMouseDown()
     {
         Debug.Log("select");

@@ -3,34 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class Artorias_Character : ICharacterStats
 {
-
-    public System.Type type { get; set; } = typeof(ArtoriasCharGObject);
-    public ICharObject link { get; set; }
-    public double maxHealthPoints { get; set; }
-    public double curHealthPoints { get; set; }
-    public double maxConcentrationPoints { get; set; }
-    public double armor { get; set; }
-    public double baseDamage { get; set; }
-    public CharacterType charType { get; set; }
-    public double baseSpeed { get; set; }
-
-
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
-    public GameObject gObject { get; set; }
-    public double curConcentrationPoints { get; set; }
-    public double curArmor { get; set; }
-    public double curDamage { get; set; }
-    public double curSpeed { get; set; }
-    public double morale { get; set; }
-
     public bool skillSelected;
-
-
+    ManagerStatus status = ManagerStatus.Shutdown;
+    
 
     public Artorias_Character()
     {
+        charClass = CharClassEnum.Artorias;
+        type = typeof(ArtoriasCharGObject);
+        typeString = type.ToString();
         maxHealthPoints = 100;
         curHealthPoints = maxHealthPoints;
         maxConcentrationPoints = 100;
@@ -39,12 +23,9 @@ public class Artorias_Character : ICharacterStats
         baseSpeed = 13;
     }
 
-    public void Death()
-    {
-        Debug.Log("OMG I'm Dead");
-    }
+    
 
-    public void Skill_1()
+    public override void Skill_1()
     {
 
         Debug.Log("Artorias Skill 1 Executed");
@@ -52,32 +33,23 @@ public class Artorias_Character : ICharacterStats
 
     }
 
-    public void Skill_2()
+    public override void Skill_2()
     {
         Debug.Log("Artorias Skill 2 Executed");
         MainManager.battleManager.target.TakeDamage(15);
     }
 
-    public void Skill_3()
+    public override void Skill_3()
     {
         Debug.Log("Artorias Skill 3 Executed");
         MainManager.battleManager.target.TakeDamage(14);
     }
 
-    public void Skill_4()
+    public override void Skill_4()
     {
         Debug.Log("Artorias Skill 4 Executed");
         MainManager.battleManager.target.TakeDamage(13);
     }
-
-    public void TakeDamage(double dmg)
-    {
-        this.curHealthPoints -= dmg - armor;
-    }
-
-
-    
-    
 
     public async void Initialize()
     {
@@ -85,8 +57,5 @@ public class Artorias_Character : ICharacterStats
        status = ManagerStatus.Initialized;
     }
 
-    public string SaveToString()
-    {
-        return JsonUtility.ToJson(this);
-    }
+    
 }
