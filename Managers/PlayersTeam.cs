@@ -7,6 +7,7 @@ public  class PlayersTeam : MonoBehaviour, IManager
    // [SerializeField]
     public ICharacterStats[] team;
     public TorchBar torchBar;
+    public bool isInBattle = false;
     public  ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
 
     private int torchLight = 100;

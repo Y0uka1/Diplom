@@ -8,6 +8,8 @@ public class UIManager: MonoBehaviour, IManager
     public  BattleFeed feed;
     public  TurnPointer turnPointer;
     public  HealthBarManager healthBar;
+    private GameObject CommonUI;
+    private GameObject BattleUI;
 
     public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
 
@@ -17,22 +19,29 @@ public class UIManager: MonoBehaviour, IManager
         feed = FindObjectOfType<BattleFeed>();
         turnPointer = FindObjectOfType<TurnPointer>();
         healthBar = GetComponent<HealthBarManager>();
-       // feed.Initialize();
-       // stats.Initialize();
-       // turnPointer.Initialize();
+        CommonUI = GameObject.FindGameObjectWithTag("CommonUI");
+        BattleUI = GameObject.FindGameObjectWithTag("BattleUI");
+        // feed.Initialize();
+        // stats.Initialize();
+        // turnPointer.Initialize();
         //healthBar.Initialize();
+        BattleUI.SetActive(false);
         status = ManagerStatus.Initialized;
         Debug.Log("UI manager onine");
+        
     }
 
     public void InitializeCommonUI()
     {
+        CommonUI.SetActive(true);
         healthBar.Initialize();
     }
 
     public void InitializeBattleUI()
     {
-        feed.Initialize();
+        CommonUI.SetActive(false);
+        BattleUI.SetActive(true);
+      //  feed.Initialize();
         stats.Initialize();
         turnPointer.Initialize();
     }

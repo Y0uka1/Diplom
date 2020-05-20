@@ -80,15 +80,18 @@ public class BattleManager : MonoBehaviour, IManager
 
        
         // ExecuteEnemyAttack += OnEnemyAttack;
-        status = ManagerStatus.Initialized;
+        
         OnTurnChangesEvent += OnTurnChanges;
         ExecuteAttack += OnExecuteAttack;
+        status = ManagerStatus.Initialized;
 
         MainManager.skillManager.Initialize();
 
-        
+       
 
         ChangeTurn();
+        MainManager.ui.InitializeBattleUI();
+        MainManager.ui.healthBar.InitializeEnemyHBar();
     }
 
     public IEnumerator BattleStart()
@@ -149,9 +152,25 @@ public class BattleManager : MonoBehaviour, IManager
         skill = null;
         ChangeTurn();
     }
-    
-    private void Update()
+
+    public void OnBattleStars()
     {
+        MainManager.enemyTeam.GetCaveEnemy();
+        float x = GameObject.FindGameObjectWithTag("MainCamera").transform.position.x;
         
+        x += 3.8f;
+        foreach (var i in MainManager.enemyTeam.team)
+        {
+            GameObject temp = new GameObject();
+            Vector3 pos = new Vector3(x, 1, 0);
+            temp.transform.position = pos;
+            System.Type type = i.type;
+            var chara = temp.AddComponent(type) as ICharObject;
+
+            chara.Initialize(i);
+            // Instantiate(temp, pos, new Quaternion(0, 0, 0, 0));
+            x += 3.8f;
+        }
+        Initialize();
     }
 }

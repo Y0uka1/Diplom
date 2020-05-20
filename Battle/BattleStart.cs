@@ -40,4 +40,22 @@ public class BattleStart : MonoBehaviour
 
 
     }
+
+    public void OnBattleStars()
+    {
+        MainManager.enemyTeam.GetCaveEnemy();
+       float x = 3.8f;
+        foreach (var i in MainManager.enemyTeam.team)
+        {
+            GameObject temp = new GameObject();
+            Vector3 pos = new Vector3(x, 3, 0);
+            temp.transform.position = pos;
+            System.Type type = i.type;
+            var chara = temp.AddComponent(type) as ICharObject;
+
+            chara.Initialize(i);
+            // Instantiate(temp, pos, new Quaternion(0, 0, 0, 0));
+            x += 3.8f;
+        }
+    }
 }

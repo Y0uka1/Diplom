@@ -25,7 +25,7 @@ public class SectionGenerator : MonoBehaviour
             collider.isTrigger = true;
             //temp.layer = 2;
             SectionEvent se = temp.AddComponent<SectionEvent>();
-            temp.transform.position = new Vector3(curPosition.x + 6.2f, curPosition.y);
+            temp.transform.position = new Vector3(curPosition.x + 6.2f, curPosition.y, 20);
             se.Initialize();
             curPosition = temp.transform.position;
         }

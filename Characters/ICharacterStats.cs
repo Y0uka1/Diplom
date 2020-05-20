@@ -25,6 +25,7 @@ public interface ICharacterStats
      void Skill_3();
      void Skill_4();
 
+     string SaveToString();
     //void OnClicked();
 
 }

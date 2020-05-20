@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Artorias_Character : ICharacterStats
+public class LamiaChar : ICharacterStats
 {
-
-    public System.Type type { get; set; } = typeof(ArtoriasCharGObject);
+    public System.Type type { get; set; } = typeof(LamiaCharGO);
     public ICharObject link { get; set; }
     public double maxHealthPoints { get; set; }
     public double curHealthPoints { get; set; }
@@ -26,18 +24,6 @@ public class Artorias_Character : ICharacterStats
     public double morale { get; set; }
 
     public bool skillSelected;
-
-
-
-    public Artorias_Character()
-    {
-        maxHealthPoints = 100;
-        curHealthPoints = maxHealthPoints;
-        maxConcentrationPoints = 100;
-        armor = 10;
-        baseDamage = 15;
-        baseSpeed = 13;
-    }
 
     public void Death()
     {
@@ -73,16 +59,6 @@ public class Artorias_Character : ICharacterStats
     public void TakeDamage(double dmg)
     {
         this.curHealthPoints -= dmg - armor;
-    }
-
-
-    
-    
-
-    public async void Initialize()
-    {
-       
-       status = ManagerStatus.Initialized;
     }
 
     public string SaveToString()

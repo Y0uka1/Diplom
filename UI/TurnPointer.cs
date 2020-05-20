@@ -14,7 +14,7 @@ public class TurnPointer : MonoBehaviour , IManager
     public void Initialize()
     {
         pointerSprite = GetComponent<SpriteRenderer>();
-        
+        pointerSprite.enabled = true;
         MainManager.battleManager.OnTurnChangesEvent += ChangePos;
         ChangePos();
         status = ManagerStatus.Initialized;
@@ -22,6 +22,7 @@ public class TurnPointer : MonoBehaviour , IManager
 
     void ChangePos()
     {
+        
         curCharPosition = MainManager.battleManager.currentChar.link.transform.position;
         transform.position = new Vector2(curCharPosition.x, curCharPosition.y - 4);
         Debug.Log("OOOOOOOOOOOOOOOOOOOM");

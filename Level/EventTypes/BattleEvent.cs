@@ -10,8 +10,8 @@ public class BattleEvent :MonoBehaviour, ISectionEventType
     public void Initialize()
     {
         //interactObject = GetComponent<GameObject>();
-        SpriteRenderer sprite = this.gameObject.AddComponent<SpriteRenderer>();
-        sprite.sprite = Resources.Load<Sprite>("Sprites/BattleEvent");
+       // SpriteRenderer sprite = this.gameObject.AddComponent<SpriteRenderer>();
+        //sprite.sprite = Resources.Load<Sprite>("Sprites/BattleEvent");
     }
 
     public void OnInteract()
@@ -27,6 +27,8 @@ public class BattleEvent :MonoBehaviour, ISectionEventType
         if (isFinded == false)
         {
             TorchAndMoraleLowering();
+            MainManager.playersTeam.isInBattle = true;
+            MainManager.battleManager.OnBattleStars();
             isFinded = true;
         }
     }

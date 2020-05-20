@@ -27,6 +27,6 @@ public class HealthBarGO:MonoBehaviour
     public void SetPosition()
     {
         
-        hBar.transform.position = new Vector3(character.link.transform.position.x - 1.5f, character.link.transform.position.y + 4, character.link.transform.position.z);
+        hBar.transform.position = new Vector3(character.link.transform.position.x /*- 1.5f*/, character.link.transform.position.y + 4, character.link.transform.position.z);
     }
 }

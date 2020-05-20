@@ -10,10 +10,13 @@ public class MoveRight : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButton(0))
+        if (MainManager.playersTeam.isInBattle == false)
         {
-            team.transform.position += new Vector3(0.1f, 0);
-            camera.transform.position += new Vector3(0.1f, 0);
+            if (Input.GetMouseButton(0))
+            {
+                team.transform.position += new Vector3(0.1f, 0);
+                camera.transform.position += new Vector3(0.1f, 0);
+            }
         }
     }
    

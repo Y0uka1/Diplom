@@ -34,7 +34,7 @@ public class Placeholder : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Click");
+
         /*if(TeamBuilder.tempCharacter!=null)
         {
             character = TeamBuilder.tempCharacter;

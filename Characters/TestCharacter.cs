@@ -76,24 +76,12 @@ public class TestCharacter :  ICharacterStats
         curHealthPoints -= dmg - armor;        
     }
 
-    void Awake()
+    public string SaveToString()
     {
-
-        
+        return JsonUtility.ToJson(this);
     }
 
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-   
 
     public async void  Initialize()
     {
