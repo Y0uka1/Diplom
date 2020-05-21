@@ -10,7 +10,7 @@ public class Artorias_Character : ICharacterStats
     ManagerStatus status = ManagerStatus.Shutdown;
     
 
-    public Artorias_Character()
+    public Artorias_Character():base()
     {
         charClass = CharClassEnum.Artorias;
         type = typeof(ArtoriasCharGObject);
@@ -18,9 +18,16 @@ public class Artorias_Character : ICharacterStats
         maxHealthPoints = 100;
         curHealthPoints = maxHealthPoints;
         maxConcentrationPoints = 100;
+        curConcentrationPoints = maxConcentrationPoints;
         armor = 10;
+        curArmor = armor;
         baseDamage = 15;
         baseSpeed = 13;
+        curSpeed = baseSpeed;
+        skill2Usage = 10;
+        skill3Usage = 15;
+        skill4Usage = 20;
+        concentrationRegeneration = 5;
     }
 
     

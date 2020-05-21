@@ -13,7 +13,7 @@ public class CharactersSave : ScriptableObject
     public void SaveData()
     {
         Debug.Log("Save");
-        characters = new List<ICharacterStats>() { new Artorias_Character(), new LamiaChar(), new EnemyTest1() };
+        characters = new List<ICharacterStats>() { new Artorias_Character(), new LamiaChar(), new LamiaChar(), new LamiaChar() };
 
         string json="";
 
@@ -27,7 +27,7 @@ public class CharactersSave : ScriptableObject
         File.WriteAllText(Application.dataPath + "jjjjsave.txt", json);
     }
 
-    public void LoadData()
+    public List<ICharacterStats> LoadData()
     {
         string json = File.ReadAllText(Application.dataPath + "jjjjsave.txt");
         string[] splitedJson = json.Split(new string[] { SEPARATOR }, System.StringSplitOptions.None) ;
@@ -47,6 +47,6 @@ public class CharactersSave : ScriptableObject
                 characters.Add(character);
             }
        }
-        Debug.Log(characters);
+        return characters;
     }
 }

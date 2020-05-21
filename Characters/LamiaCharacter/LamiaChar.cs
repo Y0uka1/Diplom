@@ -9,7 +9,7 @@ public class LamiaChar : ICharacterStats
 
     public bool skillSelected;
 
-    public LamiaChar()
+    public LamiaChar():base()
     {
         type = typeof(LamiaCharGO);
         typeString = type.ToString();
@@ -20,6 +20,14 @@ public class LamiaChar : ICharacterStats
         baseDamage = 30;
         baseSpeed = 13;
         charClass = CharClassEnum.Lamia;
+        curConcentrationPoints = maxConcentrationPoints;
+        armor = 10;
+        curArmor = armor;
+        curSpeed = baseSpeed;
+        skill2Usage = 10;
+        skill3Usage = 15;
+        skill4Usage = 20;
+        concentrationRegeneration = 5;
     }
 
     
