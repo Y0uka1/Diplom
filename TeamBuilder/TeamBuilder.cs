@@ -19,14 +19,8 @@ public class TeamBuilder : ScriptableObject, IManager
 
     public ManagerStatus status { get; set ; }
 
-    private void Start()
-    {
-        Initialize();
-        // characterList = new List<GameObject>();
-      //  button = GetComponent<Button>();
-      //  button.onClick.AddListener(TeamReady);
-        
-    }
+   
+      
 
     public void PlaceholderActivate()
     {
@@ -51,5 +45,7 @@ public class TeamBuilder : ScriptableObject, IManager
     {
         team = new ICharacterStats[4];
         placeholders = new Placeholder[4];
+       placeholders = FindObjectsOfType<Placeholder>();
+       
     }
 }

@@ -7,10 +7,10 @@ public class LevelStartButton : MonoBehaviour
 {
     Button button;
 
-    void Start()
+    public void Initialize()
     {
           button = GetComponent<Button>();
-          button.onClick.AddListener(MainManager.teamBuilder.TeamReady);
+          button.onClick.AddListener(TownManager.teamBuilder.TeamReady);
     }
 
     // Update is called once per frame

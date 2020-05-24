@@ -12,23 +12,23 @@ public class Placeholder : MonoBehaviour, IPointerDownHandler
     
     public Image placeholderImage;
 
-    private void Start()
+    public void Initialize()
     {
         placeholderImage =this.gameObject.transform.GetChild(0).GetComponent<Image>();
-        placeholderImage.color = new Color(255, 255, 255, 0);
-        MainManager.teamBuilder.Activate += OnPlaceholderActivate;
-        MainManager.teamBuilder.placeholders[index] = this;
+        placeholderImage.enabled = false;
+        TownManager.teamBuilder.Activate += OnPlaceholderActivate;
+       TownManager.teamBuilder.placeholders[index] = this;
     }
 
     private void OnPlaceholderActivate()
     {
-        if (MainManager.teamBuilder.activePlaceholder != this)
+        if (TownManager.teamBuilder.activePlaceholder != this)
         {
-            placeholderImage.color = new Color(255, 255, 255, 0);
+            placeholderImage.enabled = false;
         }
         else
         {
-            placeholderImage.color = new Color(255, 255, 255, 255);
+            placeholderImage.enabled = true;
         }
     }
 
@@ -41,8 +41,8 @@ public class Placeholder : MonoBehaviour, IPointerDownHandler
             TeamBuilder.tempCharacter = null;
         }*/
         //TeamBuilder.characterList.content.
-        MainManager.teamBuilder.activePlaceholder = this;
-        MainManager.teamBuilder.PlaceholderActivate();
+        TownManager.teamBuilder.activePlaceholder = this;
+        TownManager.teamBuilder.PlaceholderActivate();
        
 
     }

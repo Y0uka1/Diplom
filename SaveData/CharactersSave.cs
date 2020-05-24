@@ -12,8 +12,7 @@ public class CharactersSave : ScriptableObject
 
     public void SaveData()
     {
-        Debug.Log("Save");
-        characters = new List<ICharacterStats>() { new Artorias_Character(), new LamiaChar(), new LamiaChar(), new LamiaChar() };
+        
 
         string json="";
 

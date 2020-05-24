@@ -7,14 +7,16 @@ public class TestLevelSelect : MonoBehaviour
 {
     Button button;
 
-    private void Start()
+    public void Initialize()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(LevelLoad);
+        button.onClick.AddListener(this.LevelLoad);
     }
 
-    private void LevelLoad()
+   
+
+    public void LevelLoad()
     {
-        MainManager.teamBuilder.loadLevelName = "TestLevel";
+        TownManager.teamBuilder.loadLevelName = "TestLevel";
     }
 }

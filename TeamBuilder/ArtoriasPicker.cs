@@ -10,7 +10,7 @@ public class ArtoriasPicker : ACPicker
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnSelect);
-        character = new Artorias_Character();
+      //  character = new Artorias_Character();
         GetComponentInChildren<Text>().text = "Artorias";
     }
 

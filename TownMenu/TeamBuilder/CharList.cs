@@ -5,32 +5,43 @@ using UnityEngine;
 public class CharList : MonoBehaviour
 {
     List<ICharacterStats> charList;
-    void Start()
+    public void Initialize()
     {
+        foreach (Transform i in this.gameObject.transform)
+        {
+            Object.Destroy(i.gameObject);
+        }
+
+        gameObject.transform.DetachChildren();
+
         charList = MainManager.charSave.LoadData();
         foreach (var i in charList)
         {
             GameObject temp;
-            temp = getPrefabPath(i.charClass);
+            temp = getPrefab(i);
+            
             temp.transform.SetParent(this.transform);
         }
     }
 
-    GameObject getPrefabPath(CharClassEnum type)
+    GameObject getPrefab(ICharacterStats chara)
     {
         GameObject temp = Instantiate(Resources.Load<GameObject>("Prefabs/CharacterSelectPrefab"));
         
-        switch (type)
+        switch (chara.charClass)
         {
             case CharClassEnum.Artorias:
             {
-                 temp.AddComponent(typeof(ArtoriasPicker));
+                    ArtoriasPicker picker = temp.AddComponent(typeof(ArtoriasPicker)) as ArtoriasPicker;
+                    picker.character = chara;
+                    
                     break;
             }
 
             case CharClassEnum.Lamia:
             {
-                    temp.AddComponent(typeof(LamiaPicker));
+                    LamiaPicker picker = temp.AddComponent(typeof(LamiaPicker)) as LamiaPicker;
+                    picker.character = chara;
                     break;
             }
         }
