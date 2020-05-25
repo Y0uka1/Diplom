@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour, IManager
 {
@@ -15,9 +15,10 @@ public class MainManager : MonoBehaviour, IManager
     public static SkillExecute skillManager;
     public static UIManager ui;
     public static InventoryManager inventory;
-  //  public static TeamBuilder teamBuilder;
+    public static NavigationMaster navigationMaster;
+    //  public static TeamBuilder teamBuilder;
     public static CharactersSave charSave;
-
+    public static ResourcesData resourcesData;
     void Awake()
     {
 
@@ -26,8 +27,9 @@ public class MainManager : MonoBehaviour, IManager
 
         //  enemyTeam = new ICharObject[4];
 
-        
-        
+        SceneManager.sceneLoaded += TownManagerInitialize;
+
+
 
         battleManager = GetComponent<BattleManager>();
         skillManager = GetComponent<SkillExecute>();
@@ -57,16 +59,28 @@ public class MainManager : MonoBehaviour, IManager
 
     public void Initialize()
     {
-        foreach(var temp in managers)
+        charSave = ScriptableObject.CreateInstance(typeof(CharactersSave)) as CharactersSave;
+        charSave.LoadData();
+
+        resourcesData = ScriptableObject.CreateInstance(typeof(ResourcesData)) as ResourcesData;
+        
+        foreach (var temp in managers)
         {
             temp.Initialize();
         }
 
-        charSave = ScriptableObject.CreateInstance(typeof(CharactersSave)) as CharactersSave;
-        charSave.LoadData();
-
         Status =ManagerStatus.Initialized;
         status = ManagerStatus.Initialized;
+    }
+
+    public void TownManagerInitialize(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Town")
+        {
+            Debug.Log("Town");
+            navigationMaster = GameObject.FindObjectOfType<NavigationMaster>();
+            navigationMaster.Initialize();
+        }
     }
 
     /*public static void InitializePlayersTeam()

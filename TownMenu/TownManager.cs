@@ -9,6 +9,7 @@ public class TownManager : MonoBehaviour
     public static ForgeList forgeList;
     public static MapManager mapManager;
     public static CharList charList;
+    public static ResourcesCountUI resourcesUI;
 
     public static void Initialize()
     {
@@ -18,7 +19,8 @@ public class TownManager : MonoBehaviour
         teamBuilder = ScriptableObject.CreateInstance(typeof(TeamBuilder)) as TeamBuilder;
         
         mapManager = ScriptableObject.CreateInstance(typeof(MapManager)) as MapManager;
-
-
+        MainManager.resourcesData.LoadData();
+        resourcesUI = FindObjectOfType<ResourcesCountUI>();
+        resourcesUI.Initialize();
     }
 }

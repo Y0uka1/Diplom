@@ -5,5 +5,13 @@ using UnityEngine;
 public enum ResourceTypes
 {
     Money,
-    Humans
+    Humans,
+    WeaponShard,
+    WeaponChunck,
+    WeaponSlab,
+    ArmorShard,
+    ArmorChunck,
+    ArmorSlab,
+    BuildingMaterials
+
 }

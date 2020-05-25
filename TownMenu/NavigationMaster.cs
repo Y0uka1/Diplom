@@ -19,8 +19,9 @@ public class NavigationMaster : MonoBehaviour
 
     
 
-    void Start()
+    public void Initialize()
     {
+        Debug.Log("NavigationMaster");
         detailsList = new List<GameObject>();
 
         teamBuilderMaster = GameObject.Find("AllyListMaster").GetComponent<Button>();
@@ -42,7 +43,7 @@ public class NavigationMaster : MonoBehaviour
 
 
         TownManager.Initialize();
-
+        
         AllDetailHide(null);
         TeamBuilderMasterClicked();
 
