@@ -10,7 +10,6 @@ public class ResourcesButton : MonoBehaviour
     {
 
         panel = gameObject.transform.parent.gameObject;
-        Debug.Log(panel.GetComponent<RectTransform>().anchoredPosition);
         button = GetComponent<UnityEngine.UI.Button>();
         button.onClick.AddListener(PanelUP);
     }

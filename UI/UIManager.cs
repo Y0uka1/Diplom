@@ -11,7 +11,7 @@ public class UIManager: MonoBehaviour, IManager
     private GameObject CommonUI;
     private GameObject BattleUI;
 
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
 
     public void Initialize()
     {
@@ -26,7 +26,7 @@ public class UIManager: MonoBehaviour, IManager
         // turnPointer.Initialize();
         //healthBar.Initialize();
         BattleUI.SetActive(false);
-        status = ManagerStatus.Initialized;
+        status = ManagerStatus.Online;
         Debug.Log("UI manager onine");
         
     }

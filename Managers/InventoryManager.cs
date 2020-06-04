@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class InventoryManager :MonoBehaviour, IManager
 {
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
     public Dictionary<ResourceTypes, int> availableResources;
     public void Initialize()
     {
         availableResources = new Dictionary<ResourceTypes, int>();
         availableResources.Add(ResourceTypes.Money, 0);
         availableResources.Add(ResourceTypes.Humans, 0);
-        status = ManagerStatus.Initialized;
+        status = ManagerStatus.Online;
     }
 
     public void ResAdd(ResourceTypes type, int count)

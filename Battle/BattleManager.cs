@@ -23,7 +23,7 @@ public class BattleManager : MonoBehaviour, IManager
     public delegate void SwitchChar();
     public event SwitchChar Switch;
     System.Random rand;
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
 
     void Start()
     {
@@ -83,7 +83,7 @@ public class BattleManager : MonoBehaviour, IManager
         
         OnTurnChangesEvent += OnTurnChanges;
         ExecuteAttack += OnExecuteAttack;
-        status = ManagerStatus.Initialized;
+        status = ManagerStatus.Online;
 
         MainManager.skillManager.Initialize();
 
@@ -97,7 +97,7 @@ public class BattleManager : MonoBehaviour, IManager
     public IEnumerator BattleStart()
     {
        
-        while(MainManager.Status != ManagerStatus.Initialized)
+        while(MainManager.Status != ManagerStatus.Online)
             yield return new WaitForSeconds(0.5f);
         
     }

@@ -33,7 +33,7 @@ public class CharactersSave : ScriptableObject
 
         characters = new List<ICharacterStats>();
         
-        Debug.Log(splitedJson);
+     //   Debug.Log(splitedJson);
 
        foreach(string i in splitedJson)
        {

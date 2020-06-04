@@ -8,7 +8,7 @@ public  class PlayersTeam : MonoBehaviour, IManager
     public ICharacterStats[] team;
     public TorchBar torchBar;
     public bool isInBattle = false;
-    public  ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public  ManagerStatus status { get; set; } = ManagerStatus.Offline;
 
     private int torchLight = 100;
     public int TorchLight {
@@ -35,7 +35,7 @@ public  class PlayersTeam : MonoBehaviour, IManager
         torchLight = 100;
         Debug.Log(torchLight);
         team = new ICharacterStats[4];
-        status = ManagerStatus.Initialized;
+        status = ManagerStatus.Online;
        
         Debug.Log("Player's team manager online");
     }

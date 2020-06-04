@@ -17,7 +17,7 @@ public class TestCharacter :  ICharacterStats
     public CharacterType charType { get; set; } = CharacterType.Enemy;
     
 
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
     public double curConcentrationPoints { get ; set; }
     public double curArmor { get; set; }
     public double curDamage { get ; set ; }
@@ -91,6 +91,6 @@ public class TestCharacter :  ICharacterStats
       //  else
         //    charType = CharacterType.Enemy;
        // type = charType.ToString();
-        status = ManagerStatus.Initialized;
+        status = ManagerStatus.Online;
     }
 }

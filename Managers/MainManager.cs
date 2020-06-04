@@ -7,7 +7,7 @@ public class MainManager : MonoBehaviour, IManager
 {
 
     static List<IManager> managers;
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
     public static ManagerStatus Status;
     public static BattleManager battleManager;
     public static PlayersTeam playersTeam;
@@ -69,8 +69,8 @@ public class MainManager : MonoBehaviour, IManager
             temp.Initialize();
         }
 
-        Status =ManagerStatus.Initialized;
-        status = ManagerStatus.Initialized;
+        Status =ManagerStatus.Online;
+        status = ManagerStatus.Online;
     }
 
     public void TownManagerInitialize(Scene scene, LoadSceneMode mode)

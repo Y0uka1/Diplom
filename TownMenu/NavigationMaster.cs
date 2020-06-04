@@ -15,13 +15,16 @@ public class NavigationMaster : MonoBehaviour
     public Button forgeMaster;
     public GameObject forgeDetail;
 
+    public Button tavernMaster;
+    public GameObject tavernDetail;
+
     List<GameObject> detailsList;
 
     
 
     public void Initialize()
     {
-        Debug.Log("NavigationMaster");
+     //   Debug.Log("NavigationMaster");
         detailsList = new List<GameObject>();
 
         teamBuilderMaster = GameObject.Find("AllyListMaster").GetComponent<Button>();
@@ -33,13 +36,17 @@ public class NavigationMaster : MonoBehaviour
         forgeMaster = GameObject.Find("ForgeMaster").GetComponent<Button>();
         forgeDetail = GameObject.Find("ForgeDetail");
 
+        tavernMaster = GameObject.Find("TavernMaster").GetComponent<Button>();
+        tavernDetail = GameObject.Find("TavernDetail");
 
         detailsList.Add(teamBuilderDetail);
         detailsList.Add(levelSelectDetail);
         detailsList.Add(forgeDetail);
+        detailsList.Add(tavernDetail);
         teamBuilderMaster.onClick.AddListener(TeamBuilderMasterClicked);
         levelSelectMaster.onClick.AddListener(levelSelectMasterClicked);
         forgeMaster.onClick.AddListener(ForgeMasterClickerd);
+        tavernMaster.onClick.AddListener(TavernMasterClicked);
 
 
         TownManager.Initialize();
@@ -99,6 +106,16 @@ public class NavigationMaster : MonoBehaviour
             forgeDetail.SetActive(true);
             TownManager.forgeList.Initialize();
             TownManager.equipmentManager.Initialize();
+        }
+    }
+
+    private void TavernMasterClicked()
+    {
+        AllDetailHide(tavernDetail);
+        if (!tavernDetail.activeSelf)
+        {
+            tavernDetail.SetActive(true);
+            TownManager.tavernManager.Initialize();
         }
     }
 }

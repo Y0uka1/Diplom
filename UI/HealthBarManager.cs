@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthBarManager : MonoBehaviour , IManager
 {
     public HealthBarGO[] hBarList;
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
 
   /*  public void Initialize(ICharacterStats character)
     {
@@ -29,7 +29,7 @@ public class HealthBarManager : MonoBehaviour , IManager
            
         }
        
-        status = ManagerStatus.Initialized;
+        status = ManagerStatus.Online;
     }
 
    public void InitializeEnemyHBar()

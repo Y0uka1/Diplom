@@ -2,31 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForgeList : MonoBehaviour
+public class TavernList : MonoBehaviour
 {
-    public List<ICharacterStats> charList;
-   
-    public void Initialize()
+    private void Start()
     {
-        EquipmentManager.character = null;
+        
+    }
+
+    public List<ICharacterStats> charList;
+    public Dictionary<ICharacterStats,GameObject> charListGO;
+    public void GetList()
+    {
+        charListGO = new Dictionary<ICharacterStats, GameObject>();
         foreach (Transform i in this.gameObject.transform)
         {
             Object.Destroy(i.gameObject);
         }
-    //    Debug.Log(gameObject.transform.childCount);
+        //    Debug.Log(gameObject.transform.childCount);
         gameObject.transform.DetachChildren();
 
-        charList = MainManager.charSave.LoadData();
+        charList = TownManager.charList.charList;
         foreach (var i in charList)
         {
             GameObject temp = Instantiate(Resources.Load<GameObject>("Prefabs/CharacterSelectPrefab"));
-            ForgeCharSelect select = temp.AddComponent(typeof(ForgeCharSelect)) as ForgeCharSelect;
-            select.character = i;
-            select.Initialize();
+            TavernPicker select = temp.AddComponent(typeof(TavernPicker)) as TavernPicker;
+            select.character = i;     
             temp.transform.SetParent(this.transform);
+            charListGO.Add(i,temp);
         }
-        EquipmentManager.character = charList[0];
     }
-
-   
 }

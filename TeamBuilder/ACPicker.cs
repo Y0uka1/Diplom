@@ -16,6 +16,7 @@ public abstract class ACPicker : MonoBehaviour
         {
             this.gameObject.transform.SetParent(TownManager.teamBuilder.activePlaceholder.transform);
             TownManager.teamBuilder.activePlaceholder.character = character;
+            TownManager.charList.charList.Remove(character);
         }
         else
         {
@@ -24,7 +25,9 @@ public abstract class ACPicker : MonoBehaviour
             temp.gameObject.transform.localPosition = new Vector3(0, 80, 0);
             this.gameObject.transform.SetParent(TownManager.teamBuilder.activePlaceholder.transform);
             TownManager.teamBuilder.activePlaceholder.character = character;
-
+            TownManager.charList.charList.Remove(character);
+            if(temp.gameObject.GetComponent<ACPicker>().character!=character)
+            TownManager.charList.charList.Add(temp.gameObject.GetComponent<ACPicker>().character);
         }
         this.gameObject.transform.localPosition = new Vector3(0, 80, 0);
 

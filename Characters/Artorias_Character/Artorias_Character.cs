@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Artorias_Character : ICharacterStats
 {
     public bool skillSelected;
-    ManagerStatus status = ManagerStatus.Shutdown;
+    ManagerStatus status = ManagerStatus.Offline;
     
 
     public Artorias_Character():base()
@@ -61,7 +61,7 @@ public class Artorias_Character : ICharacterStats
     public async void Initialize()
     {
        
-       status = ManagerStatus.Initialized;
+       status = ManagerStatus.Online;
     }
 
     

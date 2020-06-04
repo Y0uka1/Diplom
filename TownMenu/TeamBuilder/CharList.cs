@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class CharList : MonoBehaviour
 {
-    List<ICharacterStats> charList;
+   public List<ICharacterStats> charList;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
+    
     public void Initialize()
     {
-        foreach (Transform i in this.gameObject.transform)
-        {
-            Object.Destroy(i.gameObject);
-        }
-
-        gameObject.transform.DetachChildren();
-
-        charList = MainManager.charSave.LoadData();
+       
+       // {
+            foreach (Transform i in this.gameObject.transform)
+            {
+                Object.Destroy(i.gameObject);
+            }
+             
+            gameObject.transform.DetachChildren();
+            if (status == ManagerStatus.Offline)
+             {
+            charList = MainManager.charSave.LoadData();
+             }
         foreach (var i in charList)
-        {
-            GameObject temp;
-            temp = getPrefab(i);
-            
-            temp.transform.SetParent(this.transform);
-        }
+            {
+                GameObject temp;
+                temp = getPrefab(i);
+
+                temp.transform.SetParent(this.transform);
+            }
+            status = ManagerStatus.Online;
+       // }
     }
 
     GameObject getPrefab(ICharacterStats chara)

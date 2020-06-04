@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyTeam :MonoBehaviour, IManager
 {
     public ICharacterStats[] team;
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
 
     public System.Type[] CaveETypes;
 
@@ -38,7 +38,7 @@ public class EnemyTeam :MonoBehaviour, IManager
     {
         team = new ICharacterStats[4];
         
-        status = ManagerStatus.Initialized;
+        status = ManagerStatus.Online;
         Debug.Log("Enemy's team manager online");
     }
 }

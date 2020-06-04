@@ -11,7 +11,7 @@ public class SkillExecute : MonoBehaviour, IManager
     [SerializeField]
     int skillNumber;
 
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
 
 
     public void Refresh()

@@ -7,7 +7,7 @@ public class TurnPointer : MonoBehaviour , IManager
     Vector2 curCharPosition;
     
     SpriteRenderer pointerSprite;
-    public ManagerStatus status { get; set; } = ManagerStatus.Shutdown;
+    public ManagerStatus status { get; set; } = ManagerStatus.Offline;
    
 
     
@@ -17,7 +17,7 @@ public class TurnPointer : MonoBehaviour , IManager
         pointerSprite.enabled = true;
         MainManager.battleManager.OnTurnChangesEvent += ChangePos;
         ChangePos();
-        status = ManagerStatus.Initialized;
+        status = ManagerStatus.Online;
     }
 
     void ChangePos()
