@@ -11,6 +11,7 @@ public class TownManager : MonoBehaviour
     public static CharList charList;
     public static ResourcesCountUI resourcesUI;
     public static TavernManager tavernManager;
+    public static KaravanManager karavanManager;
     public static void Initialize()
     {
         forgeList = FindObjectOfType<ForgeList>();
@@ -22,7 +23,9 @@ public class TownManager : MonoBehaviour
 
         tavernManager = ScriptableObject.CreateInstance(typeof(TavernManager)) as TavernManager;
 
-        MainManager.resourcesData.LoadData();
+        karavanManager = ScriptableObject.CreateInstance(typeof(KaravanManager)) as KaravanManager;
+
+       // ResourcesData.LoadData();
         resourcesUI = FindObjectOfType<ResourcesCountUI>();
         resourcesUI.Initialize();
     }

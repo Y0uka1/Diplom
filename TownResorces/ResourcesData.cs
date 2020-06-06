@@ -3,41 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class ResourcesData : ScriptableObject
+public class ResourcesData
 {
-    [SerializeField] public  int money = 0;
-    [SerializeField] public  int weaponShard = 0;
-    [SerializeField] public  int weaponChunk = 0;
-    [SerializeField] public  int weaponSlab = 0;
-    [SerializeField] public  int armorShard = 0;
-    [SerializeField] public  int armorChunck = 0;
-    [SerializeField] public  int armorSlab = 0;
-    [SerializeField] public  int humans = 0;
-    [SerializeField] public  int buildMaterials = 0;
+    [SerializeField] public  int money = 1;
+    [SerializeField] public  int weaponShard = 1;
+    [SerializeField] public  int weaponChunk = 1;
+    [SerializeField] public  int weaponSlab = 1;
+    [SerializeField] public  int armorShard = 1;
+    [SerializeField] public  int armorChunck = 1;
+    [SerializeField] public  int armorSlab = 1;
+    [SerializeField] public  int humans = 1;
+    [SerializeField] public  int buildMaterials = 1;
+    [SerializeField] public int glory = 500;
 
     
 
-    public void SaveData()
+    public static void SaveData()
     {
-        string tmp = JsonUtility.ToJson(this);
-        File.WriteAllText(Application.dataPath + "townResources.txt", tmp);
+        string tmp = JsonUtility.ToJson(new ResourcesData());
+        File.WriteAllText(Application.persistentDataPath + "townResources.txt", tmp);
     }
 
-    public void LoadData()
+    public static void LoadData()
     {
-      ResourcesData resData = ScriptableObject.CreateInstance(typeof(ResourcesData)) as ResourcesData;
-        string json = File.ReadAllText(Application.dataPath + "townResources.txt");
+        string json="";
+        try
+        {
+             json = File.ReadAllText(Application.persistentDataPath + "townResources.txt");
+        }
+        catch
+        {
+            SaveData();
+        }
+        ResourcesData resData = new ResourcesData();
+       
         JsonUtility.FromJsonOverwrite(json, resData);
 
 
-        money = resData.money;
-        weaponChunk = resData.weaponChunk;
-        weaponShard = resData.weaponShard;
-        weaponSlab = resData.weaponSlab;
-        armorShard = resData.armorShard;
-        armorChunck = resData.armorChunck;
-        armorSlab = resData.armorSlab;
-        humans = resData.humans;
-        buildMaterials = resData.buildMaterials;
+        ResourcesManager.money = resData.money;
+        ResourcesManager.weaponChunk = resData.weaponChunk;
+        ResourcesManager.weaponShard = resData.weaponShard;
+        ResourcesManager.weaponSlab = resData.weaponSlab;
+        ResourcesManager.armorShard = resData.armorShard;
+        ResourcesManager.armorChunck = resData.armorChunck;
+        ResourcesManager.armorSlab = resData.armorSlab;
+        ResourcesManager.humans = resData.humans;
+        ResourcesManager.buildMaterials = resData.buildMaterials;
+        ResourcesManager.glory = resData.glory;
     }
 }

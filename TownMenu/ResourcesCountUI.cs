@@ -18,15 +18,15 @@ public class ResourcesCountUI : MonoBehaviour
 
     public void Initialize()
     {
-        money.text = MainManager.resourcesData.money.ToString();
-        wepShard.text = MainManager.resourcesData.weaponShard.ToString();
-        wepChunk.text = MainManager.resourcesData.weaponChunk.ToString();
-        wepSlab.text = MainManager.resourcesData.weaponSlab.ToString();
-        armShard.text = MainManager.resourcesData.armorShard.ToString();
-        armChunk.text = MainManager.resourcesData.armorChunck.ToString();
-        armSlab.text = MainManager.resourcesData.armorSlab.ToString();
-        human.text = MainManager.resourcesData.humans.ToString();
-        build.text = MainManager.resourcesData.buildMaterials.ToString();
+        money.text = ResourcesManager.money.ToString();
+        wepShard.text = ResourcesManager.weaponShard.ToString();
+        wepChunk.text = ResourcesManager.weaponChunk.ToString();
+        wepSlab.text = ResourcesManager.weaponSlab.ToString();
+        armShard.text = ResourcesManager.armorShard.ToString();
+        armChunk.text = ResourcesManager.armorChunck.ToString();
+        armSlab.text = ResourcesManager.armorSlab.ToString();
+        human.text = ResourcesManager.humans.ToString();
+        build.text = ResourcesManager.buildMaterials.ToString();
 
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,9 @@ public class NavigationMaster : MonoBehaviour
 
     public Button tavernMaster;
     public GameObject tavernDetail;
+
+    public Button karavanMaster;
+    public GameObject karavanDetail;
 
     List<GameObject> detailsList;
 
@@ -39,15 +43,19 @@ public class NavigationMaster : MonoBehaviour
         tavernMaster = GameObject.Find("TavernMaster").GetComponent<Button>();
         tavernDetail = GameObject.Find("TavernDetail");
 
+        karavanMaster = GameObject.Find("KaravanMaster").GetComponent<Button>();
+        karavanDetail = GameObject.Find("KaravanDetail");
+
         detailsList.Add(teamBuilderDetail);
         detailsList.Add(levelSelectDetail);
         detailsList.Add(forgeDetail);
         detailsList.Add(tavernDetail);
+        detailsList.Add(karavanDetail);
         teamBuilderMaster.onClick.AddListener(TeamBuilderMasterClicked);
         levelSelectMaster.onClick.AddListener(levelSelectMasterClicked);
         forgeMaster.onClick.AddListener(ForgeMasterClickerd);
         tavernMaster.onClick.AddListener(TavernMasterClicked);
-
+        karavanMaster.onClick.AddListener(KaravanMasterClicked);
 
         TownManager.Initialize();
         
@@ -56,6 +64,8 @@ public class NavigationMaster : MonoBehaviour
 
         
     }
+
+   
 
     // Update is called once per frame
     void Update()
@@ -116,6 +126,16 @@ public class NavigationMaster : MonoBehaviour
         {
             tavernDetail.SetActive(true);
             TownManager.tavernManager.Initialize();
+        }
+    }
+
+    private void KaravanMasterClicked()
+    {
+        AllDetailHide(karavanDetail);
+        if (!karavanDetail.activeSelf)
+        {
+            karavanDetail.SetActive(true);
+            TownManager.karavanManager.Initialize();
         }
     }
 }

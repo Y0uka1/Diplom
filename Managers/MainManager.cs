@@ -62,7 +62,8 @@ public class MainManager : MonoBehaviour, IManager
         charSave = ScriptableObject.CreateInstance(typeof(CharactersSave)) as CharactersSave;
         charSave.LoadData();
 
-        resourcesData = ScriptableObject.CreateInstance(typeof(ResourcesData)) as ResourcesData;
+        
+        ResourcesData.LoadData();
         
         foreach (var temp in managers)
         {

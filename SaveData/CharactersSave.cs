@@ -12,7 +12,7 @@ public class CharactersSave : ScriptableObject
 
     public void SaveData()
     {
-        
+        //characters = new List<ICharacterStats>() { new LamiaChar(), new Artorias_Character(), new Artorias_Character(), new LamiaChar() };
 
         string json="";
 
@@ -23,12 +23,21 @@ public class CharactersSave : ScriptableObject
         }
 
 
-        File.WriteAllText(Application.dataPath + "jjjjsave.txt", json);
+        File.WriteAllText(Application.persistentDataPath + "jjjjsave.txt", json);
     }
 
     public List<ICharacterStats> LoadData()
     {
-        string json = File.ReadAllText(Application.dataPath + "jjjjsave.txt");
+        string json = "";
+
+        try
+        {
+            json = File.ReadAllText(Application.persistentDataPath + "jjjjsave.txt");
+        }
+        catch
+        {
+            SaveData();
+        }
         string[] splitedJson = json.Split(new string[] { SEPARATOR }, System.StringSplitOptions.None) ;
 
         characters = new List<ICharacterStats>();
