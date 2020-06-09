@@ -14,47 +14,67 @@ public class LamiaChar : ICharacterStats
         type = typeof(LamiaCharGO);
         typeString = type.ToString();
         maxHealthPoints = 100;
-        curHealthPoints = maxHealthPoints;
         maxConcentrationPoints = 100;
-        armor = 10;
+        armor = 3;
         baseDamage = 30;
         baseSpeed = 13;
         charClass = CharClassEnum.Lamia;
-        curConcentrationPoints = maxConcentrationPoints;
-        armor = 10;
-        curArmor = armor;
-        curSpeed = baseSpeed;
         skill2Usage = 10;
         skill3Usage = 15;
         skill4Usage = 20;
         concentrationRegeneration = 5;
+
+        skill1Target = CharacterType.Enemy;
+        skill2Target = CharacterType.Ally;
+        skill3Target = CharacterType.Ally;
+        skill4Target = CharacterType.Ally;
+
+        base.CurrentStatsInitialize();
     }
 
     
     public override void Skill_1()
     {
 
-        Debug.Log("Lamia Skill 1 Executed");
-        MainManager.battleManager.target.TakeDamage(16);
+        MainManager.battleManager.target.TakeDamage(10);
 
     }
 
     public override void Skill_2()
     {
-        Debug.Log("Lamia Skill 2 Executed");
-        MainManager.battleManager.target.TakeDamage(15);
+        MainManager.battleManager.target.CurHealthPoints += 20;
+        MainManager.battleManager.target.LooseMorale(-10);
+        CurConcentrationPoints -= skill2Usage;
     }
 
     public override void Skill_3()
     {
-        Debug.Log("Lamia Skill 3 Executed");
-        MainManager.battleManager.target.TakeDamage(14);
+        BuffStruct temp = new BuffStruct();
+        temp = new BuffStruct(
+                   3,
+                   temp.character = MainManager.battleManager.target,
+                    () => { temp.character.curSpeed += 10; },
+                    () => { temp.character.LooseMorale(-5); },
+                    () => { temp.character.curSpeed -= 10; }
+                   );
+
+        MainManager.battleManager.BuffAdd(temp);
+        CurConcentrationPoints -= skill3Usage;
     }
 
     public override void Skill_4()
     {
-        Debug.Log("Lamia Skill 4 Executed");
-        MainManager.battleManager.target.TakeDamage(13);
+        BuffStruct temp = new BuffStruct();
+        temp = new BuffStruct(
+                  3,
+                   temp.character = MainManager.battleManager.target,
+                   () => { temp.character.curDamage += 20; },
+                   () => { temp.character.curHealthPoints -= 2; },
+                   () => { temp.character.curDamage -= 20; }
+                  );
+
+        MainManager.battleManager.BuffAdd(temp);
+        CurConcentrationPoints -= skill4Usage;
     }
 
 }

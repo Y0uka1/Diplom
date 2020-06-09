@@ -9,10 +9,19 @@ public class CharactersSave : ScriptableObject
     const string SEPARATOR = "SEPARATOR";
     [SerializeField] List<ICharacterStats> characters;
     
+    public void Initialize()
+    {
+        characters = new List<ICharacterStats>();
+    }
 
     public void SaveData()
     {
-        //characters = new List<ICharacterStats>() { new LamiaChar(), new Artorias_Character(), new Artorias_Character(), new LamiaChar() };
+        if (characters.Count <= 0 || characters==null)
+        {
+           
+            characters.Add(new Artorias_Character());
+            characters.Add(new LamiaChar());
+        }
 
         string json="";
 
@@ -23,16 +32,17 @@ public class CharactersSave : ScriptableObject
         }
 
 
-        File.WriteAllText(Application.persistentDataPath + "jjjjsave.txt", json);
+        File.WriteAllText(Application.persistentDataPath + "Characters.txt", json);
     }
 
     public List<ICharacterStats> LoadData()
     {
+        Debug.Log(Application.persistentDataPath);
         string json = "";
 
         try
         {
-            json = File.ReadAllText(Application.persistentDataPath + "jjjjsave.txt");
+            json = File.ReadAllText(Application.persistentDataPath + "Characters.txt");
         }
         catch
         {
@@ -56,5 +66,11 @@ public class CharactersSave : ScriptableObject
             }
        }
         return characters;
+    }
+
+    public static void AddChar(ICharacterStats chara)
+    {
+        MainManager.charSave.characters.Add(chara);
+        MainManager.charSave.SaveData();
     }
 }

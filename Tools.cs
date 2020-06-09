@@ -16,6 +16,10 @@ public class Tools
                 {
                     return typeof(LamiaChar);
                 }
+            case CharClassEnum.Drida:
+                {
+                    return typeof(DridaCharacter);
+                }
             default:
                 {
                     return typeof(EnemyTest1);

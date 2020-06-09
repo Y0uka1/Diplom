@@ -19,6 +19,8 @@ public class MainManager : MonoBehaviour, IManager
     //  public static TeamBuilder teamBuilder;
     public static CharactersSave charSave;
     public static ResourcesData resourcesData;
+    public static List<ICharacterStats> busyChars;
+    public static RequestStruct requestedResources;
     void Awake()
     {
 
@@ -29,7 +31,7 @@ public class MainManager : MonoBehaviour, IManager
 
         SceneManager.sceneLoaded += TownManagerInitialize;
 
-
+        busyChars = new List<ICharacterStats>();
 
         battleManager = GetComponent<BattleManager>();
         skillManager = GetComponent<SkillExecute>();
@@ -52,19 +54,19 @@ public class MainManager : MonoBehaviour, IManager
         DontDestroyOnLoad(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+ 
 
     public void Initialize()
     {
         charSave = ScriptableObject.CreateInstance(typeof(CharactersSave)) as CharactersSave;
+        charSave.Initialize();
         charSave.LoadData();
 
         
         ResourcesData.LoadData();
-        
+        requestedResources = new RequestStruct();
+        requestedResources.LoadData();
+
         foreach (var temp in managers)
         {
             temp.Initialize();
@@ -72,13 +74,15 @@ public class MainManager : MonoBehaviour, IManager
 
         Status =ManagerStatus.Online;
         status = ManagerStatus.Online;
+
+        
     }
 
     public void TownManagerInitialize(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Town")
         {
-            Debug.Log("Town");
+
             navigationMaster = GameObject.FindObjectOfType<NavigationMaster>();
             navigationMaster.Initialize();
         }

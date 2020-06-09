@@ -51,6 +51,13 @@ public class KaravanTrade : MonoBehaviour
     public int arm3CountInt =0;
     public int gloryCountInt =100;
 
+    public int wep1PriceInt = 1000;
+    public int wep2PriceInt = 3000;
+    public int wep3PriceInt = 5000;
+    public int arm1PriceInt = 1000;
+    public int arm2PriceInt = 3000;
+    public int arm3PriceInt = 5000;
+
 
     public void Initialize()
     {
@@ -60,7 +67,7 @@ public class KaravanTrade : MonoBehaviour
         wep1RightButton = wep1Trade.transform.GetChild(2).gameObject.GetComponent<Button>();
         wep1Count = wep1Trade.transform.GetChild(3).gameObject.GetComponent<Text>();
         wep1Count.text = wep1CountInt.ToString();
-
+        wep1LeftButton.onClick.RemoveAllListeners();
         wep1LeftButton.onClick.AddListener(() =>
         {
             if (wep1CountInt > 0)
@@ -68,14 +75,16 @@ public class KaravanTrade : MonoBehaviour
                 wep1CountInt--;
                 wep1Count.text = wep1CountInt.ToString();
             }
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
+        wep1RightButton.onClick.RemoveAllListeners();
         wep1RightButton.onClick.AddListener(() =>
         {
 
             wep1CountInt++;
             wep1Count.text = wep1CountInt.ToString();
-
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
         wep2Trade = GameObject.Find("wep2Trade");
@@ -85,6 +94,7 @@ public class KaravanTrade : MonoBehaviour
         wep2Count = wep2Trade.transform.GetChild(3).gameObject.GetComponent<Text>();
         wep2Count.text = wep3CountInt.ToString();
 
+        wep2LeftButton.onClick.RemoveAllListeners();
         wep2LeftButton.onClick.AddListener(() =>
         {
             if (wep2CountInt > 0)
@@ -92,14 +102,15 @@ public class KaravanTrade : MonoBehaviour
                 wep2CountInt--;
                 wep2Count.text = wep2CountInt.ToString();
             }
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
+        wep2RightButton.onClick.RemoveAllListeners();
         wep2RightButton.onClick.AddListener(() =>
         {
-
             wep2CountInt++;
             wep2Count.text = wep2CountInt.ToString();
-
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
         wep3Trade = GameObject.Find("wep3Trade");
@@ -109,6 +120,7 @@ public class KaravanTrade : MonoBehaviour
         wep3Count = wep3Trade.transform.GetChild(3).gameObject.GetComponent<Text>();
         wep3Count.text = wep3CountInt.ToString();
 
+        wep3LeftButton.onClick.RemoveAllListeners();
         wep3LeftButton.onClick.AddListener(() =>
         {
             if (wep3CountInt > 0)
@@ -116,14 +128,16 @@ public class KaravanTrade : MonoBehaviour
                 wep3CountInt--;
                 wep3Count.text = wep3CountInt.ToString();
             }
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
+        wep3RightButton.onClick.RemoveAllListeners();
         wep3RightButton.onClick.AddListener(() =>
         {
 
             wep3CountInt++;
             wep3Count.text = wep3CountInt.ToString();
-
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
         arm1Trade = GameObject.Find("arm1Trade");
@@ -133,21 +147,25 @@ public class KaravanTrade : MonoBehaviour
         arm1Count = arm1Trade.transform.GetChild(3).gameObject.GetComponent<Text>();
         arm1Count.text = arm1CountInt.ToString();
 
-        arm1LeftButton.onClick.AddListener(() =>
+
+       arm1LeftButton.onClick.RemoveAllListeners();
+       arm1LeftButton.onClick.AddListener(() =>
         {
             if (arm1CountInt > 0)
             {
                 arm1CountInt--;
                 arm1Count.text = arm1CountInt.ToString();
             }
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
+        arm1RightButton.onClick.RemoveAllListeners();
         arm1RightButton.onClick.AddListener(() =>
         {
 
             arm1CountInt++;
             arm1Count.text = arm1CountInt.ToString();
-
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
         arm2Trade = GameObject.Find("arm2Trade");
@@ -158,6 +176,7 @@ public class KaravanTrade : MonoBehaviour
 
         arm2Count.text = arm2CountInt.ToString();
 
+        arm2LeftButton.onClick.RemoveAllListeners();
         arm2LeftButton.onClick.AddListener(() =>
         {
             if (arm2CountInt > 0)
@@ -165,14 +184,16 @@ public class KaravanTrade : MonoBehaviour
                 arm2CountInt--;
                 arm2Count.text = arm2CountInt.ToString();
             }
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
+        arm2RightButton.onClick.RemoveAllListeners();
         arm2RightButton.onClick.AddListener(() =>
         {
 
             arm2CountInt++;
             arm2Count.text = arm2CountInt.ToString();
-
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
         arm3Trade = GameObject.Find("arm3Trade");
@@ -182,6 +203,7 @@ public class KaravanTrade : MonoBehaviour
         arm3Count = arm3Trade.transform.GetChild(3).gameObject.GetComponent<Text>();
         arm3Count.text = arm3CountInt.ToString();
 
+        arm3LeftButton.onClick.RemoveAllListeners();
         arm3LeftButton.onClick.AddListener(() =>
         {
             if (arm3CountInt > 0)
@@ -189,14 +211,16 @@ public class KaravanTrade : MonoBehaviour
                 arm3CountInt--;
                 arm3Count.text = arm3CountInt.ToString();
             }
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
+        arm3RightButton.onClick.RemoveAllListeners();
         arm3RightButton.onClick.AddListener(() =>
         {
            
                 arm3CountInt++;
                 arm3Count.text = arm3CountInt.ToString();
-            
+            TownManager.karavanManager.acceptButton.PriceCheck();
         });
 
         gloryCountInt = ResourcesManager.glory;
@@ -212,13 +236,13 @@ public class KaravanTrade : MonoBehaviour
 
     void PriceIni()
     {
-        wep1Price.text = "500";
-        wep2Price.text = "1000";
-        wep3Price.text = "1500";
+        wep1Price.text = wep1PriceInt.ToString();
+        wep2Price.text = wep2PriceInt.ToString();
+        wep3Price.text = wep3PriceInt.ToString();
 
-        arm1Price.text = "500";
-        arm2Price.text = "1000";
-        arm3Price.text = "1500";
+        arm1Price.text = arm1PriceInt.ToString();
+        arm2Price.text = arm2PriceInt.ToString();
+        arm3Price.text = arm3PriceInt.ToString();
     }
 
     // Start is called before the first frame update

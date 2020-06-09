@@ -6,5 +6,6 @@ public enum CharClassEnum
 {
     Artorias,
     Lamia,
+    Drida,
     Enemy
 }

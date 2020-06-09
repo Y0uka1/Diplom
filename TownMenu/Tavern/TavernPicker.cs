@@ -29,7 +29,7 @@ public class TavernPicker : MonoBehaviour
         {
             if (!selected)
             {
-                if (!TownManager.tavernManager.busyChars.Contains(character))
+                if (!MainManager.busyChars.Contains(character))
                 {
 
                     if (TownManager.tavernManager.AddToList(character))

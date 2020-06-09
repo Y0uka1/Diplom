@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourcesManager : MonoBehaviour
+public class ResourcesManager 
 {
     [SerializeField] public static int money = 1;
     [SerializeField] public static int weaponShard = 1;

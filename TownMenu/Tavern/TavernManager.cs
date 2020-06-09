@@ -22,7 +22,7 @@ public class TavernManager : ScriptableObject, IManager
     public List<ICharacterStats> bordel;
     public List<ICharacterStats> room;
 
-    public List<ICharacterStats> busyChars;
+   
 
    public RelaxType curType = RelaxType.NULL;
 
@@ -53,7 +53,7 @@ public class TavernManager : ScriptableObject, IManager
             casino = new List<ICharacterStats>(maxCasino);
             bordel = new List<ICharacterStats>(maxBordel);
             room = new List<ICharacterStats>(maxRoom);
-            busyChars = new List<ICharacterStats>();
+            MainManager.busyChars = new List<ICharacterStats>();
 
             charList = GameObject.FindObjectOfType<TavernList>();
             charList.GetList();
@@ -118,22 +118,22 @@ public class TavernManager : ScriptableObject, IManager
     {
         foreach(var i in bar)
         {
-            i.morale += 25+(tavernLevel*10);
+            i.LooseMorale(-(25 + (tavernLevel * 10)));
         }
 
         foreach (var i in casino)
         {
-            i.morale += 50 + (tavernLevel * 10);
+            i.LooseMorale(-(50 + (tavernLevel * 10)));
         }
 
         foreach (var i in bordel)
         {
-            i.morale += 75 + (tavernLevel * 10);
+            i.LooseMorale(-(75 + (tavernLevel * 10)));
         }
 
         foreach (var i in room)
         {
-            i.morale += 100 + (tavernLevel * 10);
+            i.LooseMorale(-(100 + (tavernLevel * 10)));
         }
     }
 
@@ -172,7 +172,7 @@ public class TavernManager : ScriptableObject, IManager
         }
 
         if(result==true)
-            busyChars.Add(chara);
+            MainManager.busyChars.Add(chara);
 
         return result;
     }
@@ -210,7 +210,7 @@ public class TavernManager : ScriptableObject, IManager
 
        
       
-        busyChars.Remove(chara);
+        MainManager.busyChars.Remove(chara);
     }
 
 

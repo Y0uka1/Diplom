@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class TavernList : MonoBehaviour
 {
-    private void Start()
-    {
-        
-    }
 
     public List<ICharacterStats> charList;
     public Dictionary<ICharacterStats,GameObject> charListGO;

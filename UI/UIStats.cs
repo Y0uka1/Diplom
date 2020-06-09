@@ -13,13 +13,14 @@ public class UIStats : MonoBehaviour
         stats = GetComponent<Text>();
        // MainManager.battleManager.ExecuteAttack += OnTurnChanges;
         MainManager.battleManager.OnTurnChangesEvent += OnTurnChanges;
+        OnTurnChanges();
     }
 
     private void OnTurnChanges()
     {
         character = MainManager.battleManager.currentChar;
-        statsText = $"HP:{character.curHealthPoints}/{character.maxHealthPoints}\t Armor:{character.armor} \n" +
-            $"CP:{character.maxConcentrationPoints}\nDamage:{character.baseDamage}\nSpeed:{character.baseSpeed}" +
+        statsText = $"HP:{character.curHealthPoints}/{character.maxHealthPoints}\t Armor:{character.curArmor}/{character.armor} \n" +
+            $"CP:{character.CurConcentrationPoints}/{character.maxConcentrationPoints}\nDamage:{character.curDamage}/{character.baseDamage}\nSpeed:{character.baseSpeed}" +
             $"Weapon:{character.weaponLevel}\t Armor{character.armorLevel}";
         stats.text = statsText;
     }

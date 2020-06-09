@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class LamiaCharGO : ICharObject
 {
-    private void OnMouseDown()
+   private void OnMouseDown()
     {
         Debug.Log("select");
         OnClicked();
     }
-    public void OnClicked()
+   /* public void OnClicked()
     {
         if (MainManager.battleManager.currentTurn == TurnType.Player)
         {
@@ -22,15 +22,15 @@ public class LamiaCharGO : ICharObject
                 }
             }
         }
-    }
+    }*/
 
     public override void Initialize(ICharacterStats character)
     {
         SpriteRenderer sp = gameObject.AddComponent<SpriteRenderer>();
-        sp.sprite = Resources.Load<Sprite>("Prefabs/lamia");
-        gameObject.AddComponent<BoxCollider2D>();
-
+        sp.sprite = Resources.Load<Sprite>("Sprites/Characters/lamia");     
+       
         this.character = character;
         this.character.link = this;
+     
     }
 }

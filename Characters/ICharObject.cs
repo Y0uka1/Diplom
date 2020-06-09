@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class ICharObject :MonoBehaviour , ICharacterView
+public abstract class ICharObject :MonoBehaviour , ICharacterView 
 {
     public ICharacterStats character;
     public string prefabWay;
@@ -28,7 +28,22 @@ public abstract class ICharObject :MonoBehaviour , ICharacterView
 
     }
    
+    public virtual void OnClicked()
+    {
+        if (MainManager.battleManager.currentTurn == TurnType.Player)
+        {
+            if (MainManager.battleManager.skill != null)
+            {
+                if (character.charType == MainManager.battleManager.targetType)
+                {
+                    MainManager.battleManager.target = character;
+                    MainManager.battleManager.OnTargetReady();
+                }
+            }
+        }
+    }
 
+    
     public abstract void Initialize(ICharacterStats character);
 
 }

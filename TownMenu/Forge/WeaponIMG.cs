@@ -12,28 +12,36 @@ public class WeaponIMG : MonoBehaviour
     {
         image = GetComponent<Image>();
         
-        button = transform.GetChild(0).GetComponent<Button>();
-        if (EquipmentManager.character.weaponLevel < 3)
-        {
+        button = transform.GetChild(0).GetComponent<Button>(); 
             transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/levelUP");
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(Upgrade);
-        }
-        else
-        {
-            button.gameObject.SetActive(false);
-        }
-        
+
         ImageSwitch();
     }
 
     private void Upgrade()
     {
-        if (EquipmentManager.character.weaponLevel < 3)
+        
+        switch (EquipmentManager.character.weaponLevel)
         {
-            EquipmentManager.character.weaponLevel++;
+            case 0:
+                ResourcesManager.weaponShard -= 5;
+                ResourcesManager.money -= 1000;
+                break;
+            case 1:
+                ResourcesManager.weaponChunk -= 5;
+                ResourcesManager.money -= 3000;
+                break;
+            case 2:
+                ResourcesManager.weaponSlab -= 5;
+                ResourcesManager.money -= 5000;
+                break;
         }
+        EquipmentManager.character.weaponLevel++;
         ImageSwitch();
         MainManager.charSave.SaveData();
+        ResourcesData.OnChange();
     }
 
     public void ImageSwitch()
@@ -45,22 +53,35 @@ public class WeaponIMG : MonoBehaviour
             case 0:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Weapon/wep0");
+                    if (ResourcesManager.weaponShard < 5 || ResourcesManager.money < 1000)
+                        button.interactable = false;
+                    else
+                        button.interactable = true;
                     break;
                 }
 
             case 1:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Weapon/wep1");
+                    if (ResourcesManager.weaponChunk < 5 || ResourcesManager.money < 3000)
+                        button.interactable = false;
+                    else
+                        button.interactable = true;
                     break;
                 }
             case 2:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Weapon/wep2");
+                    if (ResourcesManager.weaponSlab < 5 || ResourcesManager.money < 5000)
+                        button.interactable = false;
+                    else
+                        button.interactable = true;
                     break;
                 }
             case 3:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Weapon/wep3");
+                    button.interactable = false;
                     break;
                 }
             default:

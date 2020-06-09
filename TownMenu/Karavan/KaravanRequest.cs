@@ -10,9 +10,9 @@ public class KaravanRequest : MonoBehaviour
     Slider buildSlider;
 
     int tempGlory;
-    int moneyVal;
-    int humanVal;
-    int buildVal;
+    public int moneyVal;
+    public int humanVal;
+    public int buildVal;
 
     Text money;
     Text human;

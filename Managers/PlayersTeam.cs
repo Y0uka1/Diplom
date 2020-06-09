@@ -26,14 +26,14 @@ public  class PlayersTeam : MonoBehaviour, IManager
                 torchLight = value;
             }
             torchBar.ValueChange((float)torchLight/100);
-            Debug.Log("Torch");
+
         }
     }
 
     public  void Initialize()
     {
         torchLight = 100;
-        Debug.Log(torchLight);
+
         team = new ICharacterStats[4];
         status = ManagerStatus.Online;
        

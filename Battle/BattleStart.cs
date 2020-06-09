@@ -14,7 +14,8 @@ public class BattleStart : MonoBehaviour
             temp.transform.position = pos;
             System.Type type = i.type;
             var chara = temp.AddComponent(type) as ICharObject;
-
+           
+            
             chara.Initialize(i);
             
            // Instantiate(temp, pos, new Quaternion(0, 0, 0, 0));         

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class ResourcesData
 {
+
     [SerializeField] public  int money = 1;
     [SerializeField] public  int weaponShard = 1;
     [SerializeField] public  int weaponChunk = 1;
@@ -20,7 +22,20 @@ public class ResourcesData
 
     public static void SaveData()
     {
-        string tmp = JsonUtility.ToJson(new ResourcesData());
+        ResourcesData res = new ResourcesData();
+
+        res.money = ResourcesManager.money;
+        res.weaponChunk = ResourcesManager.weaponChunk;
+        res.weaponShard = ResourcesManager.weaponShard;
+        res.weaponSlab = ResourcesManager.weaponSlab;
+        res.armorShard = ResourcesManager.armorShard;
+        res.armorChunck = ResourcesManager.armorChunck;
+        res.armorSlab = ResourcesManager.armorSlab;
+        res.humans = ResourcesManager.humans;
+        res.buildMaterials = ResourcesManager.buildMaterials;
+        res.glory = ResourcesManager.glory;
+
+        string tmp = JsonUtility.ToJson(res);
         File.WriteAllText(Application.persistentDataPath + "townResources.txt", tmp);
     }
 
@@ -51,4 +66,11 @@ public class ResourcesData
         ResourcesManager.buildMaterials = resData.buildMaterials;
         ResourcesManager.glory = resData.glory;
     }
+
+    public static void OnChange()
+    {
+        SaveData();
+        TownManager.resourcesUI.Initialize();
+    }
+    
 }

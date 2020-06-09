@@ -16,46 +16,75 @@ public class Artorias_Character : ICharacterStats
         type = typeof(ArtoriasCharGObject);
         typeString = type.ToString();
         maxHealthPoints = 100;
-        curHealthPoints = maxHealthPoints;
         maxConcentrationPoints = 100;
-        curConcentrationPoints = maxConcentrationPoints;
-        armor = 10;
-        curArmor = armor;
+        armor = 7;
         baseDamage = 15;
-        baseSpeed = 13;
-        curSpeed = baseSpeed;
         skill2Usage = 10;
         skill3Usage = 15;
         skill4Usage = 20;
         concentrationRegeneration = 5;
+
+        skill1Target = CharacterType.Enemy;
+        skill2Target = CharacterType.Ally;
+        skill3Target = CharacterType.Enemy;
+        skill4Target = CharacterType.Enemy;
+
+        base.CurrentStatsInitialize();
     }
 
     
 
     public override void Skill_1()
     {
-
-        Debug.Log("Artorias Skill 1 Executed");
-        MainManager.battleManager.target.TakeDamage(16);
-
+        MainManager.battleManager.target.TakeDamage(25);
     }
 
     public override void Skill_2()
     {
-        Debug.Log("Artorias Skill 2 Executed");
-        MainManager.battleManager.target.TakeDamage(15);
+        MainManager.battleManager.BuffAdd(
+           new BuffStruct(
+               2,
+                this,
+                () => { this.curDamage += 15; },
+                null,
+                () => { this.curDamage -= 15; }
+               )
+           );
+        CurConcentrationPoints -= skill2Usage;
     }
 
     public override void Skill_3()
     {
-        Debug.Log("Artorias Skill 3 Executed");
-        MainManager.battleManager.target.TakeDamage(14);
+        BuffStruct temp = new BuffStruct(); 
+        temp = new BuffStruct(
+                4,
+                 temp.character = MainManager.battleManager.target,
+                 () => { temp.character.curDamage -= 8; },
+                 null,
+                 () => { temp.character.curDamage += 8; }
+                );
+
+        MainManager.battleManager.BuffAdd(temp);
+        MainManager.battleManager.target.TakeDamage(15);
+        CurConcentrationPoints -= skill3Usage;
     }
 
     public override void Skill_4()
     {
+        BuffStruct temp = new BuffStruct(); 
+        temp = new BuffStruct(
+                3,
+                 temp.character = MainManager.battleManager.target,
+                 () => { temp.character.curArmor -= 5; },
+                 () => { temp.character.curHealthPoints -= 10; },
+                 () => { temp.character.curArmor += 5; }
+                );
+
+        MainManager.battleManager.BuffAdd(temp);
+
         Debug.Log("Artorias Skill 4 Executed");
-        MainManager.battleManager.target.TakeDamage(13);
+        MainManager.battleManager.target.TakeDamage(1);
+        CurConcentrationPoints -= skill4Usage;
     }
 
     public async void Initialize()

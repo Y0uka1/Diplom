@@ -17,16 +17,21 @@ public class CharList : MonoBehaviour
             }
              
             gameObject.transform.DetachChildren();
-            if (status == ManagerStatus.Offline)
-             {
+            
+        if((charList==null || charList.Count<1) && MainManager.busyChars.Count<1)
             charList = MainManager.charSave.LoadData();
-             }
+           
+
+
         foreach (var i in charList)
             {
-                GameObject temp;
-                temp = getPrefab(i);
+                if (!MainManager.busyChars.Contains(i))
+                {
+                    GameObject temp;
+                    temp = getPrefab(i);
 
-                temp.transform.SetParent(this.transform);
+                    temp.transform.SetParent(this.transform);
+                }
             }
             status = ManagerStatus.Online;
        // }
@@ -49,6 +54,13 @@ public class CharList : MonoBehaviour
             case CharClassEnum.Lamia:
             {
                     LamiaPicker picker = temp.AddComponent(typeof(LamiaPicker)) as LamiaPicker;
+                    picker.character = chara;
+                    break;
+            }
+
+            case CharClassEnum.Drida:
+            {
+                    DridaPicker picker = temp.AddComponent(typeof(DridaPicker)) as DridaPicker;
                     picker.character = chara;
                     break;
             }

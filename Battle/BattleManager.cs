@@ -23,12 +23,12 @@ public class BattleManager : MonoBehaviour, IManager
     public delegate void SwitchChar();
     public event SwitchChar Switch;
     System.Random rand;
+
+    public CharacterType targetType;
     public ManagerStatus status { get; set; } = ManagerStatus.Offline;
 
-    void Start()
-    {
-        
-    }
+
+    List<BuffStruct> buffs;
 
     void ChangeTurn()
     {
@@ -53,6 +53,7 @@ public class BattleManager : MonoBehaviour, IManager
             currentTurn = TurnType.Enemy;
             OnEnemyAttack();
         }
+        OnTurnPassed();
     }
 
 
@@ -78,9 +79,9 @@ public class BattleManager : MonoBehaviour, IManager
 
         RefreshCurChars();
 
-       
+        buffs = new List<BuffStruct>();
         // ExecuteEnemyAttack += OnEnemyAttack;
-        
+
         OnTurnChangesEvent += OnTurnChanges;
         ExecuteAttack += OnExecuteAttack;
         status = ManagerStatus.Online;
@@ -119,7 +120,6 @@ public class BattleManager : MonoBehaviour, IManager
     {
        
         skill();
-        //currentChar.go.GetComponent<Renderer>().material.color = Color.white;
         
         ExecuteAttack.Invoke();
       
@@ -137,9 +137,23 @@ public class BattleManager : MonoBehaviour, IManager
        
         target = MainManager.playersTeam.team[rand.Next(0, 4)];
         yield return new WaitForSecondsRealtime(1.5f);
-        target.TakeDamage(currentChar.baseDamage);
-        //currentChar.go.GetComponent<Renderer>().material.color = Color.white;
-        
+        int randSkill = Random.Range(0,100);
+        Debug.Log(randSkill);
+        if (randSkill < 50)
+        {
+            currentChar.Skill_1();
+        }else if (randSkill < 70)
+        {
+            currentChar.Skill_2();
+        }else if(randSkill < 90)
+        {
+            currentChar.Skill_3();
+        }
+        else
+        {
+            currentChar.Skill_4();
+        }
+
         ExecuteAttack.Invoke();
        
     }
@@ -168,9 +182,30 @@ public class BattleManager : MonoBehaviour, IManager
             var chara = temp.AddComponent(type) as ICharObject;
 
             chara.Initialize(i);
-            // Instantiate(temp, pos, new Quaternion(0, 0, 0, 0));
             x += 3.8f;
         }
         Initialize();
     }
+
+    public  void BuffAdd(BuffStruct buff)
+    {
+        buffs.Add(buff);
+        buff.OnBuffAdd();
+    }
+
+    public  void BuffRemove(BuffStruct buff)
+    {
+        buffs.Remove(buff);
+    }
+
+    private  void OnTurnPassed()
+    {
+        for(int i=0;i< buffs.Count; i++) { 
+            if(buffs[i].character==currentChar)
+                buffs[i].TurnPassed();
+        }
+        currentChar.CurConcentrationPoints += currentChar.concentrationRegeneration;
+    }
+
+    
 }
