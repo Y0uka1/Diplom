@@ -5,11 +5,13 @@ using UnityEngine;
 
 public abstract class ICharacterStats
 {
+    public int id;
     public System.Type type;
     public string typeString;
     [NonSerialized] public ICharObject link;
     public double maxHealthPoints;
     [NonSerialized] public double curHealthPoints;
+    [NonSerialized] public string avatarPath;
     public double CurHealthPoints { get { return curHealthPoints; }
         set
         {
@@ -47,7 +49,18 @@ public abstract class ICharacterStats
     public double armor;
     [NonSerialized] public double curArmor;
     public double baseDamage;
-    [NonSerialized] public double curDamage;
+    [NonSerialized] double curDamage;
+    public double CurDamage
+    {
+        get { return curDamage; }
+        set
+        {
+            if (value < 0)
+                curDamage = 0;
+            else
+                curDamage = value;
+        }
+    }
     public CharacterType charType;
     public double baseSpeed;
     [NonSerialized] public double curSpeed;
@@ -69,10 +82,28 @@ public abstract class ICharacterStats
     public CharacterType skill3Target;
     public CharacterType skill4Target;
 
-  
+    public string skill1Name;
+    public string skill2Name;
+    public string skill3Name;
+    public string skill4Name;
 
     List<ArtifactDictionary.Artifact> artifacts;
 
+    [NonSerialized] List<BuffStruct> buffs;
+
+    public ICharacterStats(int id)
+    {
+        artifacts = new List<ArtifactDictionary.Artifact>();
+        maxMorale = 150;
+        weaponLevel = 0;
+        armorLevel = 0;
+        skill1Level = 0;
+        skill2Level = 0;
+        skill3Level = 0;
+        skill4Level = 0;
+        this.id = id;
+        buffs = new List<BuffStruct>();
+    }
 
     public ICharacterStats()
     {
@@ -84,15 +115,68 @@ public abstract class ICharacterStats
         skill2Level = 0;
         skill3Level = 0;
         skill4Level = 0;
-        
+        buffs = new List<BuffStruct>();
+
     }
 
     public virtual void TakeDamage(double dmg)
     {
-        this.CurHealthPoints -= dmg - (armor + (2*armorLevel));
+        double total = dmg - (armor + (2 * armorLevel));
+        if (total < 0)
+            total = 0;
+        this.CurHealthPoints -=total;
     }
     public virtual void Death () {
-        Debug.Log("OMG I'm Dead");
+        Debug.Log("DEad" + id);      
+        for (int i = 0; i < MainManager.battleManager.currentTurnCharacters.Count; i++)
+        {
+            if (MainManager.battleManager.currentTurnCharacters[i].id == this.id)
+            {
+                MainManager.battleManager.currentTurnCharacters.Remove(MainManager.battleManager.currentTurnCharacters[i]);
+                break;
+            }
+        }
+
+
+        if (this.charType == CharacterType.Ally)
+        {
+            for (int i = 0; i < MainManager.playersTeam.team.Length; i++)
+            {
+                if (MainManager.playersTeam.team[i] != null)
+                {
+                    if (MainManager.playersTeam.team[i].id == this.id)
+                    {
+                        MainManager.playersTeam.team[i] = null;
+                        break;
+                    }
+                }
+
+
+            }
+        }
+        else
+        {
+            for (int i = 0; i < MainManager.enemyTeam.team.Length; i++)
+            {
+                if (MainManager.enemyTeam.team[i] != null)
+                {
+                    if (MainManager.enemyTeam.team[i].id == this.id)
+                    {
+                        MainManager.enemyTeam.team[i] = null;
+                        break;
+                    }
+                }
+            }
+        }
+            for (int i = 0; i < MainManager.charSave.characters.Count; i++)
+            {
+                 if (MainManager.charSave.characters[i].id == this.id)
+                 {
+                    CharactersSave.RemoveChar(MainManager.charSave.characters[i]);
+                    break;
+                 }
+            }
+        link.Death();
     }
     public virtual void Skill_1() { }
     public virtual void Skill_2() { }
@@ -133,8 +217,28 @@ public abstract class ICharacterStats
    public virtual void LooseMorale(double damage)
     {
         curMorale -= damage;
-        if (curMorale <= 0)
-            Death();
+     //   if (curMorale <= 0)
+       //     Death();
+    }
+
+    public virtual void BuffAdd(BuffStruct buff)
+    {
+        buffs.Add(buff);
+        buff.OnBuffAdd?.Invoke();
+    }
+
+    public virtual void BuffRemove(BuffStruct buff)
+    {
+        buffs.Remove(buff);
+    }
+
+    public virtual void OnTurnPassed()
+    {
+       for(int i = 0; i < buffs.Count; i++)
+        {
+            buffs[i].TurnPassed();
+        }
+        CurConcentrationPoints += concentrationRegeneration;
     }
 
 }

@@ -12,6 +12,9 @@ public enum ResourceTypes
     ArmorShard,
     ArmorChunck,
     ArmorSlab,
-    BuildingMaterials
+    BuildingMaterials,
+    Glory,
+    Torch,
+    Food
 
 }

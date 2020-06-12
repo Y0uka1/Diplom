@@ -10,6 +10,8 @@ public class UIManager: MonoBehaviour, IManager
     public  HealthBarManager healthBar;
     private GameObject CommonUI;
     private GameObject BattleUI;
+    InventoryUI inventoryUI;
+    CharsUI charsUI;
 
     public ManagerStatus status { get; set; } = ManagerStatus.Offline;
 
@@ -21,10 +23,13 @@ public class UIManager: MonoBehaviour, IManager
         healthBar = GetComponent<HealthBarManager>();
         CommonUI = GameObject.FindGameObjectWithTag("CommonUI");
         BattleUI = GameObject.FindGameObjectWithTag("BattleUI");
+        charsUI = GameObject.FindObjectOfType<CharsUI>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
         // feed.Initialize();
         // stats.Initialize();
         // turnPointer.Initialize();
         //healthBar.Initialize();
+
         BattleUI.SetActive(false);
         status = ManagerStatus.Online;
         Debug.Log("UI manager onine");
@@ -33,6 +38,9 @@ public class UIManager: MonoBehaviour, IManager
 
     public void InitializeCommonUI()
     {
+        charsUI.Initialize();
+        inventoryUI.Initialize();
+        BattleUI.SetActive(false);
         CommonUI.SetActive(true);
         healthBar.Initialize();
     }

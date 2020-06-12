@@ -18,10 +18,16 @@ public class UIStats : MonoBehaviour
 
     private void OnTurnChanges()
     {
-        character = MainManager.battleManager.currentChar;
-        statsText = $"HP:{character.curHealthPoints}/{character.maxHealthPoints}\t Armor:{character.curArmor}/{character.armor} \n" +
-            $"CP:{character.CurConcentrationPoints}/{character.maxConcentrationPoints}\nDamage:{character.curDamage}/{character.baseDamage}\nSpeed:{character.baseSpeed}" +
-            $"Weapon:{character.weaponLevel}\t Armor{character.armorLevel}";
-        stats.text = statsText;
+        try
+        {
+            character = MainManager.battleManager.currentChar;
+            statsText = $"HP:{character.curHealthPoints}/{character.maxHealthPoints}\t Armor:{character.curArmor}/{character.armor} \n" +
+                $"CP:{character.CurConcentrationPoints}/{character.maxConcentrationPoints}\nDamage:{character.CurDamage}/{character.baseDamage}\nSpeed:{character.curSpeed}/{character.baseSpeed}" +
+                $"Weapon:{character.weaponLevel}\t Armor{character.armorLevel}";
+            stats.text = statsText;
+        }catch
+        {
+            statsText = "";
+        }
     }
 }

@@ -11,6 +11,9 @@ public class DridaPicker :  ACPicker
         button = GetComponent<Button>();
         button.onClick.AddListener(OnSelect);
         //   character = new LamiaChar();
+        avatar = GetComponent<Image>();
+        avatar.sprite = Resources.Load<Sprite>("Sprites/Characters/Avatars/DridaAvatar");
+      
         GetComponentInChildren<Text>().text = "Drida";
     }
 

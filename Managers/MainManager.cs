@@ -42,7 +42,7 @@ public class MainManager : MonoBehaviour, IManager
        // teamBuilder = ScriptableObject.CreateInstance(typeof(TeamBuilder)) as TeamBuilder;
         managers = new List<IManager>();
         
-       // managers.Add(battleManager);
+       managers.Add(battleManager);
         managers.Add(skillManager);
        // managers.Add(ui);
         managers.Add(playersTeam);
@@ -58,6 +58,9 @@ public class MainManager : MonoBehaviour, IManager
 
     public void Initialize()
     {
+        IDManager.LoadData();
+        Debug.Log(IDManager.GetID());
+
         charSave = ScriptableObject.CreateInstance(typeof(CharactersSave)) as CharactersSave;
         charSave.Initialize();
         charSave.LoadData();
@@ -82,9 +85,17 @@ public class MainManager : MonoBehaviour, IManager
     {
         if (scene.name == "Town")
         {
-
+            StartCoroutine(WaitForLoad(scene));
             navigationMaster = GameObject.FindObjectOfType<NavigationMaster>();
             navigationMaster.Initialize();
+        }
+    }
+
+    IEnumerator WaitForLoad(Scene scene)
+    {
+        while (!scene.isLoaded)
+        {
+            yield return null;
         }
     }
 
@@ -107,5 +118,15 @@ public class MainManager : MonoBehaviour, IManager
         ui.Initialize();
 
         
+    }
+
+    private void Update()
+    {
+        Debug.Log(charSave.characters.Count);
+    }
+
+    public static void LoadLevel(string levelName)
+    {
+        SceneManager.LoadScene(levelName);
     }
 }

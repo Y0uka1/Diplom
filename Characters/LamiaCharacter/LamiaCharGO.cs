@@ -27,7 +27,7 @@ public class LamiaCharGO : ICharObject
     public override void Initialize(ICharacterStats character)
     {
         SpriteRenderer sp = gameObject.AddComponent<SpriteRenderer>();
-        sp.sprite = Resources.Load<Sprite>("Sprites/Characters/lamia");     
+        sp.sprite = Resources.Load<Sprite>("Sprites/Characters/nun");
        
         this.character = character;
         this.character.link = this;

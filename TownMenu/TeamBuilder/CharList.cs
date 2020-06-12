@@ -10,7 +10,7 @@ public class CharList : MonoBehaviour
     public void Initialize()
     {
        
-       // {
+      
             foreach (Transform i in this.gameObject.transform)
             {
                 Object.Destroy(i.gameObject);
@@ -19,7 +19,7 @@ public class CharList : MonoBehaviour
             gameObject.transform.DetachChildren();
             
         if((charList==null || charList.Count<1) && MainManager.busyChars.Count<1)
-            charList = MainManager.charSave.LoadData();
+            charList = new List<ICharacterStats>(MainManager.charSave.LoadData());
            
 
 
@@ -34,7 +34,7 @@ public class CharList : MonoBehaviour
                 }
             }
             status = ManagerStatus.Online;
-       // }
+      
     }
 
     GameObject getPrefab(ICharacterStats chara)

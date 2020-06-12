@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public abstract class ACPicker : MonoBehaviour
 {
     public Button button;
     public ICharacterStats character;
+    public Image avatar;
     public string name;
 
     public virtual void MoveToPlaceHolder()
@@ -37,6 +39,8 @@ public abstract class ACPicker : MonoBehaviour
 
     public virtual void OnSelect()
     {
+        TownManager.tbStats.Refresh(character);
+
         Placeholder place;
 
         if (gameObject.transform.parent.TryGetComponent<Placeholder>(out place) == true && TownManager.teamBuilder.activePlaceholder != null)

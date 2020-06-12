@@ -16,6 +16,7 @@ public class ForgeCharSelect : MonoBehaviour
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnSelect);
+        button.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(character.avatarPath);
         border = new GameObject("border");
         Image img = border.AddComponent(typeof(Image)) as Image;
         img.sprite = Resources.Load<Sprite>("Sprites/border");

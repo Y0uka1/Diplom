@@ -19,71 +19,95 @@ public class Artorias_Character : ICharacterStats
         maxConcentrationPoints = 100;
         armor = 7;
         baseDamage = 15;
-        skill2Usage = 10;
-        skill3Usage = 15;
-        skill4Usage = 20;
-        concentrationRegeneration = 5;
+        skill2Usage = 20;
+        skill3Usage = 40;
+        baseSpeed = 10;
+        skill4Usage = (float)maxConcentrationPoints;
+        concentrationRegeneration = 15;
 
         skill1Target = CharacterType.Enemy;
-        skill2Target = CharacterType.Ally;
+        skill2Target = CharacterType.Enemy;
         skill3Target = CharacterType.Enemy;
         skill4Target = CharacterType.Enemy;
+
+        skill1Name = "Бросок Ножа";
+        skill2Name = "Проникающий Клинок";
+        skill3Name = "Кульбит И Удар";
+        skill4Name = "Кровавая Баня";
+
+        avatarPath = "Sprites/Characters/Avatars/plutAvatar";
 
         base.CurrentStatsInitialize();
     }
 
-    
+    public Artorias_Character(int id) : base(id)
+    {
+        charClass = CharClassEnum.Artorias;
+        type = typeof(ArtoriasCharGObject);
+        typeString = type.ToString();
+        maxHealthPoints = 100;
+        maxConcentrationPoints = 100;
+        armor = 7;
+        baseDamage = 15;
+        skill2Usage = 20;
+        skill3Usage = 40;
+        baseSpeed = 10;
+        skill4Usage = (float)maxConcentrationPoints;
+        concentrationRegeneration = 15;
+
+        skill1Target = CharacterType.Enemy;
+        skill2Target = CharacterType.Enemy;
+        skill3Target = CharacterType.Enemy;
+        skill4Target = CharacterType.Enemy;
+
+        skill1Name = "Бросок Ножа";
+        skill2Name = "Проникающий Клинок";
+        skill3Name = "Кульбит И Удар";
+        skill4Name = "Кровавая Баня";
+
+        avatarPath = "Sprites/Characters/Avatars/plutAvatar";
+
+        base.CurrentStatsInitialize();
+    }
+
+
 
     public override void Skill_1()
     {
-        MainManager.battleManager.target.TakeDamage(25);
+        MainManager.battleManager.target.TakeDamage(CurDamage + 25+(25*weaponLevel));
     }
 
     public override void Skill_2()
     {
-        MainManager.battleManager.BuffAdd(
-           new BuffStruct(
-               2,
-                this,
-                () => { this.curDamage += 15; },
-                null,
-                () => { this.curDamage -= 15; }
-               )
-           );
+        MainManager.battleManager.target.CurHealthPoints-=(25 + (15 * weaponLevel));
         CurConcentrationPoints -= skill2Usage;
     }
 
     public override void Skill_3()
     {
-        BuffStruct temp = new BuffStruct(); 
-        temp = new BuffStruct(
-                4,
-                 temp.character = MainManager.battleManager.target,
-                 () => { temp.character.curDamage -= 8; },
-                 null,
-                 () => { temp.character.curDamage += 8; }
-                );
-
-        MainManager.battleManager.BuffAdd(temp);
-        MainManager.battleManager.target.TakeDamage(15);
+        double damage = CurDamage + 20 + (20 * weaponLevel);
+        if (this.curSpeed > MainManager.battleManager.target.curSpeed)
+            damage *= 2;
+        MainManager.battleManager.target.TakeDamage(damage);
         CurConcentrationPoints -= skill3Usage;
     }
 
     public override void Skill_4()
     {
+
         BuffStruct temp = new BuffStruct(); 
         temp = new BuffStruct(
-                3,
+                999,
                  temp.character = MainManager.battleManager.target,
-                 () => { temp.character.curArmor -= 5; },
+                 () => { temp.character.CurHealthPoints -= temp.character.maxHealthPoints / 4;
+                     temp.character.curSpeed = 0;
+                     temp.character.CurDamage = temp.character.baseDamage / 2;
+                 },
                  () => { temp.character.curHealthPoints -= 10; },
-                 () => { temp.character.curArmor += 5; }
+                 null
                 );
 
-        MainManager.battleManager.BuffAdd(temp);
-
-        Debug.Log("Artorias Skill 4 Executed");
-        MainManager.battleManager.target.TakeDamage(1);
+        temp.character.BuffAdd(temp);
         CurConcentrationPoints -= skill4Usage;
     }
 

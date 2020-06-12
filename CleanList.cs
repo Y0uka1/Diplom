@@ -8,5 +8,6 @@ public class CleanList : MonoBehaviour
    void Start()
     {
         File.Delete(Application.persistentDataPath + "Characters.txt");
+        File.Delete(Application.persistentDataPath + "lastID.txt");
     }
 }

@@ -16,10 +16,11 @@ public class SectionGenerator : MonoBehaviour
     {
         GameObject temp;
         Vector2 curPosition = startSection.transform.position;
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 21; i++)
         {
            
             temp = new GameObject();
+            temp.layer = 10;
             BoxCollider2D collider = temp.AddComponent<BoxCollider2D>();
             collider.size = new Vector2(6, 6);
             collider.isTrigger = true;

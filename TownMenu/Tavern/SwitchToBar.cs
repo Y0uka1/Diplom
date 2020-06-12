@@ -4,29 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SwitchToBar : MonoBehaviour, IPointerClickHandler
+public class SwitchToBar : ACSwitch
 {
-   /// Image icon;
-    Button confirm;
-    Image levelUp;
-
-    public void Initialize()
+    public static int price;
+    public override void Initialize()
     {
-      //  icon = GetComponent<Image>();
-        confirm = transform.GetChild(2).GetComponent<Button>();
-        confirm.onClick.AddListener(OnClick);
+        base.Initialize();
+         price = 200 -(50*TownManager.tavernManager.tavernLevel);
     }
 
-
-    public void OnPointerClick(PointerEventData eventData)
+    public override void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Clicked");
         TownManager.tavernManager.curType = RelaxType.Bar;
     }
 
-    void OnClick()
+    public override void OnClick()
     {
-        Debug.Log("OnClicked");
 
         List<ICharacterStats> onDelete = new List<ICharacterStats>(TownManager.tavernManager.bar);
         for (int i = 0; i < TownManager.tavernManager.bar.Count; i++)
@@ -41,6 +34,8 @@ public class SwitchToBar : MonoBehaviour, IPointerClickHandler
             TownManager.charList.charList.Remove(i);
             TownManager.tavernManager.charList.charListGO.Remove(i);
         }
-
+        base.OnClick();
     }
+
+    
 }

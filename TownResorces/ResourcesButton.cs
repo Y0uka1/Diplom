@@ -19,6 +19,7 @@ public class ResourcesButton : MonoBehaviour
     {
 
         panel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-220, 250);
+        button.transform.localEulerAngles += new Vector3(0, 0, 180);
         button.onClick.AddListener(PanelDown);
         button.onClick.RemoveListener(PanelUP);
     }
@@ -26,6 +27,7 @@ public class ResourcesButton : MonoBehaviour
     void PanelDown()
     {
         panel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-220, -150);
+        button.transform.localEulerAngles += new Vector3(0, 0, 180);
         button.onClick.AddListener(PanelUP);
         button.onClick.RemoveListener(PanelDown);
     }

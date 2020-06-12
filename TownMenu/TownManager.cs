@@ -6,6 +6,7 @@ public class TownManager : MonoBehaviour
 {
     public static EquipmentManager equipmentManager;
     public static TeamBuilder teamBuilder;
+    public static TBCharStats tbStats;
     public static ForgeList forgeList;
     public static MapManager mapManager;
     public static CharList charList;
@@ -19,6 +20,8 @@ public class TownManager : MonoBehaviour
         equipmentManager = FindObjectOfType<EquipmentManager>();
         charList = FindObjectOfType<CharList>();
         teamBuilder = ScriptableObject.CreateInstance(typeof(TeamBuilder)) as TeamBuilder;
+
+        tbStats = GameObject.FindObjectOfType<TBCharStats>();
         
         mapManager = ScriptableObject.CreateInstance(typeof(MapManager)) as MapManager;
 

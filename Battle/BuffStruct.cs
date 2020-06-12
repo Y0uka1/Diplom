@@ -24,7 +24,7 @@ public class BuffStruct
         if (duration <= 0)
         {
             OnBuffRemove();
-            MainManager.battleManager.BuffRemove(this);
+            character.BuffRemove(this);
         }
     }
 

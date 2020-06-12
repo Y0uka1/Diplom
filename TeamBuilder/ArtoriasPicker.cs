@@ -10,6 +10,8 @@ public class ArtoriasPicker : ACPicker
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnSelect);
+        avatar = GetComponent<Image>();
+        avatar.sprite = Resources.Load<Sprite>("Sprites/Characters/Avatars/plutAvatar");
       //  character = new Artorias_Character();
         GetComponentInChildren<Text>().text = "Artorias";
     }

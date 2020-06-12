@@ -4,27 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SwitchToCasino : MonoBehaviour, IPointerClickHandler
+public class SwitchToCasino : ACSwitch
 {
-    /// Image icon;
-    Button confirm;
-    Image levelUp;
-
-    public void Initialize()
+    public static int price;
+    public override void Initialize()
     {
-        //  icon = GetComponent<Image>();
-        confirm = transform.GetChild(2).GetComponent<Button>();
-        confirm.onClick.AddListener(OnClick);
+        base.Initialize();
+        price = 500 - (50 * TownManager.tavernManager.tavernLevel);
     }
 
-
-    public void OnPointerClick(PointerEventData eventData)
+    public override void OnPointerClick(PointerEventData eventData)
     {
         TownManager.tavernManager.curType = RelaxType.Casino;
         Debug.Log("Clicked");
     }
 
-    void OnClick()
+   public  override void OnClick()
     {
         Debug.Log("OnClicked");
 
@@ -43,5 +38,6 @@ public class SwitchToCasino : MonoBehaviour, IPointerClickHandler
             TownManager.charList.charList.Remove(i);
             TownManager.tavernManager.charList.charListGO.Remove(i);
         }
+        base.OnClick();
     }
 }

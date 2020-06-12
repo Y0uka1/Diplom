@@ -18,5 +18,6 @@ public class TestLevelSelect : MonoBehaviour
     public void LevelLoad()
     {
         TownManager.teamBuilder.loadLevelName = "TestLevel";
+        LootManager.level = 1;
     }
 }

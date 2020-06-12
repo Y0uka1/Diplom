@@ -15,7 +15,9 @@ public class TavernManager : ScriptableObject, IManager
     int curBordel;
     int curRoom;
 
-    int tavernLevel;
+    public int tavernLevel;
+
+    public int totalPrice;
 
     public List<ICharacterStats> bar;
     public List<ICharacterStats> casino;
@@ -68,6 +70,8 @@ public class TavernManager : ScriptableObject, IManager
             toRoom.Initialize();
             status = ManagerStatus.Online;
         }
+
+        totalPrice = 0;
     }
 
     public bool BarAdd(ICharacterStats chara)

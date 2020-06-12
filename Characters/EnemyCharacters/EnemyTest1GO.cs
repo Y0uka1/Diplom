@@ -29,7 +29,7 @@ public class EnemyTest1GO : ICharObject
     public override void Initialize(ICharacterStats character)
     {
         SpriteRenderer sp = gameObject.AddComponent<SpriteRenderer>();
-        sp.sprite = Resources.Load<Sprite>("Prefabs/TempChar/e1");
+        sp.sprite = Resources.Load<Sprite>("Sprites/Characters/Enemy/Enemy1");
         BoxCollider2D collider = gameObject.AddComponent<BoxCollider2D>();
         collider.offset = Vector2.zero;
         collider.size = new Vector2(2, 5);

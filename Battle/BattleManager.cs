@@ -7,9 +7,9 @@ public class BattleManager : MonoBehaviour, IManager
     public TurnType currentTurn;
     //public delegate void GoBattle();
     //public event GoBattle targetRedy;
-    
-   // List<ICharacter> characters;
-    List<ICharacterStats> currentTurnCharacters;
+
+    // List<ICharacter> characters;
+    public List<ICharacterStats> currentTurnCharacters;
     public ICharacterStats currentChar;
     public delegate void Execute();
     public delegate void ExeAttack();
@@ -28,7 +28,8 @@ public class BattleManager : MonoBehaviour, IManager
     public ManagerStatus status { get; set; } = ManagerStatus.Offline;
 
 
-    List<BuffStruct> buffs;
+    bool win ;
+    bool loose ;
 
     void ChangeTurn()
     {
@@ -38,32 +39,73 @@ public class BattleManager : MonoBehaviour, IManager
 
     void OnTurnChanges()
     {
-        if (currentTurnCharacters.Count < 1)
-            RefreshCurChars();
-        currentChar = FindFastAsFuck();
-       // currentChar.go.transform.localScale += new Vector3(.2f, .2f, .2f);
-      //  currentChar.go.GetComponent<Renderer>().material.color = Color.red;
-        if (currentChar.charType == CharacterType.Ally)
+        if (MainManager.playersTeam.isInBattle)
         {
-            currentTurn = TurnType.Player;
-            Switch.Invoke();
+
+            win = true;
+            loose = true;
+
+            foreach (var i in MainManager.playersTeam.team)
+            {
+                if (i != null)
+                {
+                    loose = false;
+                    break;
+                }
+            }
+
+            foreach (var i in MainManager.enemyTeam.team)
+            {
+                if (i != null)
+                {
+                    win = false;
+                    break;
+                }
+            }
+
+            if (win == true)
+            {
+                OnBattleWin();
+            }
+            else if (loose == true)
+            {
+                OnBattleLost();
+            }
+            else
+            {
+
+                if (currentTurnCharacters.Count < 1)
+                    RefreshCurChars();
+                currentChar = FindFastAsFuck();
+
+                // currentChar.go.transform.localScale += new Vector3(.2f, .2f, .2f);
+                //  currentChar.go.GetComponent<Renderer>().material.color = Color.red;
+                if (currentChar.charType == CharacterType.Ally)
+                {
+                    currentTurn = TurnType.Player;
+                    Switch.Invoke();
+                }
+                else
+                {
+                    currentTurn = TurnType.Enemy;
+                    OnEnemyAttack();
+                }
+                currentChar.OnTurnPassed();
+            }
         }
-        else
-        {
-            currentTurn = TurnType.Enemy;
-            OnEnemyAttack();
-        }
-        OnTurnPassed();
     }
 
 
-    ICharacterStats FindFastAsFuck ()
+     ICharacterStats FindFastAsFuck ()
     {
         ICharacterStats currentChar = currentTurnCharacters[0];
         foreach (var temp in currentTurnCharacters)
         {
-            if (temp.baseSpeed > currentChar.baseSpeed)
-                currentChar = temp;
+            if (temp != null)
+            {
+                if (temp.curSpeed > currentChar.curSpeed)
+                    currentChar = temp;
+            }
         }
         currentTurnCharacters.Remove(currentChar);
        // Debug.Log(currentChar.name);
@@ -77,42 +119,45 @@ public class BattleManager : MonoBehaviour, IManager
         Debug.Log("Battle Manager online");
         rand = new System.Random();
 
-        RefreshCurChars();
+     //   RefreshCurChars();
 
-        buffs = new List<BuffStruct>();
+       
         // ExecuteEnemyAttack += OnEnemyAttack;
 
         OnTurnChangesEvent += OnTurnChanges;
         ExecuteAttack += OnExecuteAttack;
         status = ManagerStatus.Online;
 
-        MainManager.skillManager.Initialize();
+      /*  MainManager.skillManager.Initialize();
 
-       
+        win = true;
+        loose = true;
 
         ChangeTurn();
         MainManager.ui.InitializeBattleUI();
-        MainManager.ui.healthBar.InitializeEnemyHBar();
+        MainManager.ui.healthBar.InitializeEnemyHBar();*/
     }
 
-    public IEnumerator BattleStart()
+   /* public IEnumerator BattleStart()
     {
        
         while(MainManager.Status != ManagerStatus.Online)
             yield return new WaitForSeconds(0.5f);
         
-    }
+    }*/
 
     private void RefreshCurChars()
     {
         currentTurnCharacters = new List<ICharacterStats>();
         foreach (var i in MainManager.playersTeam.team)
         {
-            currentTurnCharacters.Add(i);
+            if(i!=null)
+                currentTurnCharacters.Add(i);
         }
         foreach (var i in MainManager.enemyTeam.team)
         {
-            currentTurnCharacters.Add(i);
+            if (i != null)
+                currentTurnCharacters.Add(i);
         }
     }
 
@@ -134,11 +179,18 @@ public class BattleManager : MonoBehaviour, IManager
 
     private IEnumerator isEnemyAttack()
     {
-       
-        target = MainManager.playersTeam.team[rand.Next(0, 4)];
+        int index = rand.Next(0, 4);
+        
+        do
+        {
+            index--;
+            if (index < 0)
+                index = 3;
+            yield return null;
+        } while (MainManager.playersTeam.team[index] == null);
+        target = MainManager.playersTeam.team[index];
         yield return new WaitForSecondsRealtime(1.5f);
         int randSkill = Random.Range(0,100);
-        Debug.Log(randSkill);
         if (randSkill < 50)
         {
             currentChar.Skill_1();
@@ -169,10 +221,13 @@ public class BattleManager : MonoBehaviour, IManager
 
     public void OnBattleStars()
     {
+        FindObjectOfType<MoveLeft>().collider.enabled = false;
+        FindObjectOfType<MoveRight>().collider.enabled = false;
+        MainManager.playersTeam.isInBattle = true;
         MainManager.enemyTeam.GetCaveEnemy();
         float x = GameObject.FindGameObjectWithTag("MainCamera").transform.position.x;
         
-        x += 3.8f;
+        x += 3f;
         foreach (var i in MainManager.enemyTeam.team)
         {
             GameObject temp = new GameObject();
@@ -182,29 +237,48 @@ public class BattleManager : MonoBehaviour, IManager
             var chara = temp.AddComponent(type) as ICharObject;
 
             chara.Initialize(i);
-            x += 3.8f;
+            x += 3f;
         }
-        Initialize();
+        RefreshCurChars();
+        MainManager.skillManager.Initialize();
+
+        win = true;
+        loose = true;
+
+        ChangeTurn();
+        MainManager.ui.InitializeBattleUI();
+        MainManager.ui.healthBar.InitializeEnemyHBar();
     }
 
-    public  void BuffAdd(BuffStruct buff)
+   
+
+   void OnBattleLost()
     {
-        buffs.Add(buff);
-        buff.OnBuffAdd();
+        currentChar = null;
+        target = null;
+        skill = null;
+
+        ResourcesData.SaveData();
+        MainManager.charSave.SaveData();
+        MainManager.LoadLevel("Town");
+
+        
     }
 
-    public  void BuffRemove(BuffStruct buff)
+    void OnBattleWin()
     {
-        buffs.Remove(buff);
-    }
+        currentChar = null;
+        target = null;
+        skill = null;
 
-    private  void OnTurnPassed()
-    {
-        for(int i=0;i< buffs.Count; i++) { 
-            if(buffs[i].character==currentChar)
-                buffs[i].TurnPassed();
-        }
-        currentChar.CurConcentrationPoints += currentChar.concentrationRegeneration;
+        FindObjectOfType<MoveLeft>().collider.enabled = true;
+        FindObjectOfType<MoveRight>().collider.enabled = true;
+
+        MainManager.playersTeam.isInBattle = false;
+
+        MainManager.ui.InitializeCommonUI();
+        LootManager.BattleLoot();
+        MainManager.inventory.OnLootAdded();
     }
 
     

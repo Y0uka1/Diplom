@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyTest1 : ICharacterStats
 {
-    public EnemyTest1()
+    public EnemyTest1():base(IDManager.GetID())
     {
         type = typeof(EnemyTest1GO);
         maxHealthPoints = 100;
@@ -26,14 +26,14 @@ public class EnemyTest1 : ICharacterStats
 
     public override void Skill_1()
     {
-        MainManager.battleManager.target.TakeDamage(15);
+        MainManager.battleManager.target.TakeDamage(CurDamage + 15);
         MainManager.battleManager.target.LooseMorale(20);
         Debug.Log("skill 1");
     }
 
     public override void Skill_2()
     {
-        MainManager.battleManager.target.TakeDamage(25);
+        MainManager.battleManager.target.TakeDamage(CurDamage + 25);
         Debug.Log("skill 2");
     }
 
@@ -41,7 +41,8 @@ public class EnemyTest1 : ICharacterStats
     {
         foreach (var i in MainManager.playersTeam.team)
         {
-            i.TakeDamage(5);
+            
+            i?.TakeDamage(CurDamage + 5);
         }
 
         Debug.Log("skill 3");
@@ -53,9 +54,9 @@ public class EnemyTest1 : ICharacterStats
         temp = new BuffStruct(
                   3,
                    temp.character = MainManager.battleManager.target,
-                   () => { temp.character.curDamage -= 10; },
+                   () => { temp.character.CurDamage -= 10; },
                    null,
-                   () => { temp.character.curDamage += 10; }
+                   () => { temp.character.CurDamage += 10; }
                   );
 
         Debug.Log("skill 4");

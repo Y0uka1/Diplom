@@ -36,7 +36,7 @@ public class RequestStruct
        
         JsonUtility.FromJsonOverwrite(json, this);
 
-        Debug.Log($"{money} {weaponShard} {weaponChunk} {weaponSlab}");
+
     }
 
 }

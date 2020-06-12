@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyTest2 : ICharacterStats
 {
-    public EnemyTest2()
+    public EnemyTest2() : base(IDManager.GetID())
     {
         type = typeof(EnemyTest2GO);
         maxHealthPoints = 100;
@@ -53,15 +53,18 @@ public class EnemyTest2 : ICharacterStats
     {
         foreach (var i in MainManager.playersTeam.team)
         {
-            MainManager.battleManager.BuffAdd(
-             new BuffStruct(
-                 2,
-                  i,
-                  () => { i.curArmor -= 5; },
-                  null,
-                  () => { i.curArmor += 5; }
-                 )
-             );
+            if (i != null)
+            {
+               i.BuffAdd(
+                 new BuffStruct(
+                     2,
+                      i,
+                      () => { i.curArmor -= 5; },
+                      null,
+                      () => { i.curArmor += 5; }
+                     )
+                 );
+            }
         }
 
         Debug.Log("skill 4");

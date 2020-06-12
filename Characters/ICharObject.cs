@@ -43,7 +43,10 @@ public abstract class ICharObject :MonoBehaviour , ICharacterView
         }
     }
 
-    
+    public virtual void Death()
+    {
+        Destroy(this.gameObject);
+    }
     public abstract void Initialize(ICharacterStats character);
 
 }

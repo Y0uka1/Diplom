@@ -20,8 +20,8 @@ public class LootBagEvent :MonoBehaviour,  ISectionEventType
     {
         if (isActivated == false)
         {
-            MainManager.inventory.ResAdd(ResourceTypes.Money, 100);
-            Debug.Log(MainManager.inventory.availableResources[ResourceTypes.Money]);
+            LootManager.LootBag();
+            MainManager.inventory.OnLootAdded();
             isActivated = true;
         }
     }

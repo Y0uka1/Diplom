@@ -7,7 +7,7 @@ using System;
 public class CharactersSave : ScriptableObject
 {
     const string SEPARATOR = "SEPARATOR";
-    [SerializeField] List<ICharacterStats> characters;
+    [SerializeField] public List<ICharacterStats> characters;
     
     public void Initialize()
     {
@@ -19,8 +19,8 @@ public class CharactersSave : ScriptableObject
         if (characters.Count <= 0 || characters==null)
         {
            
-            characters.Add(new Artorias_Character());
-            characters.Add(new LamiaChar());
+            characters.Add(new Artorias_Character(IDManager.GetID()));
+            characters.Add(new LamiaChar(IDManager.GetID()));
         }
 
         string json="";
@@ -71,6 +71,12 @@ public class CharactersSave : ScriptableObject
     public static void AddChar(ICharacterStats chara)
     {
         MainManager.charSave.characters.Add(chara);
+        MainManager.charSave.SaveData();
+    }
+
+    public static void RemoveChar (ICharacterStats chara)
+    {
+        MainManager.charSave.characters.Remove(chara);
         MainManager.charSave.SaveData();
     }
 }

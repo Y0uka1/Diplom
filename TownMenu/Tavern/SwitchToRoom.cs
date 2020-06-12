@@ -4,27 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SwitchToRoom : MonoBehaviour, IPointerClickHandler
+public class SwitchToRoom : ACSwitch
 {
-    /// Image icon;
-    Button confirm;
-    Image levelUp;
-
-    public void Initialize()
+    public static int price;
+    public override void Initialize()
     {
-        //  icon = GetComponent<Image>();
-        confirm = transform.GetChild(2).GetComponent<Button>();
-        confirm.onClick.AddListener(OnClick);
+        base.Initialize();
+        price = 1200 - (50 * TownManager.tavernManager.tavernLevel);
     }
 
-
-    public void OnPointerClick(PointerEventData eventData)
+    public override void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Clicked");
         TownManager.tavernManager.curType = RelaxType.Room;
     }
 
-    void OnClick()
+    public override void OnClick()
     {
         Debug.Log("OnClicked");
 
@@ -41,6 +35,6 @@ public class SwitchToRoom : MonoBehaviour, IPointerClickHandler
             TownManager.charList.charList.Remove(i);
             TownManager.tavernManager.charList.charListGO.Remove(i);
         }
-
+        base.OnClick();
     }
 }

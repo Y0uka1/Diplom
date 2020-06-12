@@ -10,7 +10,9 @@ public class LamiaPicker : ACPicker
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnSelect);
-     //   character = new LamiaChar();
+        //   character = new LamiaChar();
+        avatar = GetComponent<Image>();
+        avatar.sprite = Resources.Load<Sprite>("Sprites/Characters/Avatars/nunAvatar");
         GetComponentInChildren<Text>().text = "Lamia";
     }
     

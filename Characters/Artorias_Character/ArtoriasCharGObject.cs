@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ArtoriasCharGObject : ICharObject
 {
-     string prefabWay  = "Prefabs/ArtoriasPrefab";
-
 
    private void OnMouseDown()
     {
@@ -23,7 +21,7 @@ public class ArtoriasCharGObject : ICharObject
     public override void Initialize(ICharacterStats character)
     {
         SpriteRenderer sp = gameObject.AddComponent<SpriteRenderer>();
-        sp.sprite = Resources.Load<Sprite>("Sprites/Characters/ArtoriasStandBattle");
+        sp.sprite = Resources.Load<Sprite>("Sprites/Characters/plut2");
        
         this.character = character;
         this.character.link = this;
