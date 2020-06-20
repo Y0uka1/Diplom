@@ -13,7 +13,7 @@ public class LamiaPicker : ACPicker
         //   character = new LamiaChar();
         avatar = GetComponent<Image>();
         avatar.sprite = Resources.Load<Sprite>("Sprites/Characters/Avatars/nunAvatar");
-        GetComponentInChildren<Text>().text = "Lamia";
+       // GetComponentInChildren<Text>().text = "Целительница";
     }
     
 }

@@ -24,11 +24,6 @@ public class MainManager : MonoBehaviour, IManager
     void Awake()
     {
 
-
-        // playersTeam = new ICharObject[4];
-
-        //  enemyTeam = new ICharObject[4];
-
         SceneManager.sceneLoaded += TownManagerInitialize;
 
         busyChars = new List<ICharacterStats>();
@@ -39,16 +34,16 @@ public class MainManager : MonoBehaviour, IManager
         enemyTeam = GetComponent<EnemyTeam>();
         ui = GetComponent<UIManager>();
         inventory = GetComponent<InventoryManager>();
-       // teamBuilder = ScriptableObject.CreateInstance(typeof(TeamBuilder)) as TeamBuilder;
+
         managers = new List<IManager>();
         
        managers.Add(battleManager);
         managers.Add(skillManager);
-       // managers.Add(ui);
+
         managers.Add(playersTeam);
         managers.Add(enemyTeam);
         managers.Add(inventory);
-       // managers.Add(teamBuilder);
+
         Initialize();
 
         DontDestroyOnLoad(this);
@@ -99,17 +94,7 @@ public class MainManager : MonoBehaviour, IManager
         }
     }
 
-    /*public static void InitializePlayersTeam()
-    {
-        foreach (var i in playersTeam)
-            managers.Add(i);   
-    }
-
-    public static void InitializeEnemyTeam()
-    {
-        foreach (var i in enemyTeam)
-            managers.Add(i);
-    }*/
+   
 
     public static void InitializeBattleManager()
     {
@@ -120,10 +105,7 @@ public class MainManager : MonoBehaviour, IManager
         
     }
 
-    private void Update()
-    {
-        Debug.Log(charSave.characters.Count);
-    }
+    
 
     public static void LoadLevel(string levelName)
     {

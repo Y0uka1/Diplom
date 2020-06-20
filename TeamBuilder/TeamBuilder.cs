@@ -38,11 +38,19 @@ public class TeamBuilder : ScriptableObject, IManager
 
         MainManager.playersTeam.team = team;
 
-      //  foreach(var i in MainManager.navigationMaster.detailsList)
-       // {
-       //     i.SetActive(true);
-       // }
-        SceneManager.LoadScene(loadLevelName);
+        //  foreach(var i in MainManager.navigationMaster.detailsList)
+        // {
+        //     i.SetActive(true);
+        // }
+        foreach (var i in MainManager.playersTeam.team)
+        {
+            if (i != null)
+            {
+               SceneManager.LoadScene(loadLevelName);
+                break;
+            }
+        }
+        
     }
 
     public void Initialize()

@@ -13,7 +13,7 @@ public class ArtoriasPicker : ACPicker
         avatar = GetComponent<Image>();
         avatar.sprite = Resources.Load<Sprite>("Sprites/Characters/Avatars/plutAvatar");
       //  character = new Artorias_Character();
-        GetComponentInChildren<Text>().text = "Artorias";
+       // GetComponentInChildren<Text>().text = "Плут";
     }
 
     

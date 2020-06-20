@@ -8,7 +8,7 @@ public class ArmorIMG : MonoBehaviour
 {
     Image image;
     Button button;
-    int level;
+    Text money;
     public void Initialize()
     {
         image = GetComponent<Image>();
@@ -55,6 +55,11 @@ public class ArmorIMG : MonoBehaviour
             case 0:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Armor/arm0");
+                    Image stone = transform.GetChild(1).GetComponent<Image>();
+                    stone.sprite = Resources.Load<Sprite>("Sprites/arm1");
+                    stone.transform.GetChild(0).GetComponent<Text>().text = "5";
+                    money = transform.GetChild(2).GetComponentInChildren<Text>();
+                    money.text = "1000";
                     if (ResourcesManager.armorShard < 5 || ResourcesManager.money < 1000)
                         button.interactable = false;
                     else
@@ -65,6 +70,11 @@ public class ArmorIMG : MonoBehaviour
             case 1:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Armor/arm1");
+                    Image stone = transform.GetChild(1).GetComponent<Image>();
+                    stone.sprite = Resources.Load<Sprite>("Sprites/arm2");
+                    stone.transform.GetChild(0).GetComponent<Text>().text = "5";
+                    money = transform.GetChild(2).GetComponentInChildren<Text>();
+                    money.text = "3000";
                     if (ResourcesManager.armorChunck < 5 || ResourcesManager.money < 3000)
                         button.interactable = false;
                     else
@@ -74,6 +84,11 @@ public class ArmorIMG : MonoBehaviour
             case 2:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Armor/arm2");
+                    Image stone = transform.GetChild(1).GetComponent<Image>();
+                    stone.sprite = Resources.Load<Sprite>("Sprites/arm3");
+                    stone.transform.GetChild(0).GetComponent<Text>().text = "5";
+                    money = transform.GetChild(2).GetComponentInChildren<Text>();
+                    money.text = "5000";
                     if (ResourcesManager.armorSlab < 5 || ResourcesManager.money < 5000)
                         button.interactable = false;
                     else

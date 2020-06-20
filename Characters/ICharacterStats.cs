@@ -15,10 +15,6 @@ public abstract class ICharacterStats
     public double CurHealthPoints { get { return curHealthPoints; }
         set
         {
-            /*  if((curHealthPoints-value) <= 0)
-              {
-                  value = curHealthPoints;
-              }*/
             if (value <= 0)
             {
                 curHealthPoints = 0;

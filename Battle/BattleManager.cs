@@ -5,17 +5,14 @@ using UnityEngine;
 public class BattleManager : MonoBehaviour, IManager
 {
     public TurnType currentTurn;
-    //public delegate void GoBattle();
-    //public event GoBattle targetRedy;
 
-    // List<ICharacter> characters;
     public List<ICharacterStats> currentTurnCharacters;
     public ICharacterStats currentChar;
     public delegate void Execute();
     public delegate void ExeAttack();
     public event ExeAttack ExecuteAttack;
     public Execute skill;
-    //List<ICharacter> Allys;
+
     public ICharacterStats target;
     public delegate void TurnChanges();
     public event TurnChanges OnTurnChangesEvent;
@@ -78,8 +75,6 @@ public class BattleManager : MonoBehaviour, IManager
                     RefreshCurChars();
                 currentChar = FindFastAsFuck();
 
-                // currentChar.go.transform.localScale += new Vector3(.2f, .2f, .2f);
-                //  currentChar.go.GetComponent<Renderer>().material.color = Color.red;
                 if (currentChar.charType == CharacterType.Ally)
                 {
                     currentTurn = TurnType.Player;
@@ -108,7 +103,6 @@ public class BattleManager : MonoBehaviour, IManager
             }
         }
         currentTurnCharacters.Remove(currentChar);
-       // Debug.Log(currentChar.name);
         SkillExecute.character= currentChar;
 
         return currentChar;
@@ -119,32 +113,14 @@ public class BattleManager : MonoBehaviour, IManager
         Debug.Log("Battle Manager online");
         rand = new System.Random();
 
-     //   RefreshCurChars();
-
-       
-        // ExecuteEnemyAttack += OnEnemyAttack;
-
         OnTurnChangesEvent += OnTurnChanges;
         ExecuteAttack += OnExecuteAttack;
         status = ManagerStatus.Online;
 
-      /*  MainManager.skillManager.Initialize();
 
-        win = true;
-        loose = true;
-
-        ChangeTurn();
-        MainManager.ui.InitializeBattleUI();
-        MainManager.ui.healthBar.InitializeEnemyHBar();*/
     }
 
-   /* public IEnumerator BattleStart()
-    {
-       
-        while(MainManager.Status != ManagerStatus.Online)
-            yield return new WaitForSeconds(0.5f);
-        
-    }*/
+  
 
     private void RefreshCurChars()
     {

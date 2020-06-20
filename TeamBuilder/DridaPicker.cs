@@ -14,7 +14,7 @@ public class DridaPicker :  ACPicker
         avatar = GetComponent<Image>();
         avatar.sprite = Resources.Load<Sprite>("Sprites/Characters/Avatars/DridaAvatar");
       
-        GetComponentInChildren<Text>().text = "Drida";
+      //  GetComponentInChildren<Text>().text = "Леший";
     }
 
 }

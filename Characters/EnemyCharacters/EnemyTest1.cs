@@ -10,11 +10,11 @@ public class EnemyTest1 : ICharacterStats
     public EnemyTest1():base(IDManager.GetID())
     {
         type = typeof(EnemyTest1GO);
-        maxHealthPoints = 100;
-        maxConcentrationPoints = 100;
-        armor = 5;
-        baseDamage = 25;
-        baseSpeed = 13;
+        maxHealthPoints = 50 + (50 * LootManager.level) ;
+        maxConcentrationPoints = 1;
+        armor = 5 + (10 * LootManager.level);
+        baseDamage = 10 + (15 * LootManager.level);
+        baseSpeed = 13 + (5 * LootManager.level);
         charType = CharacterType.Enemy;
         charClass = CharClassEnum.Enemy;
         skill2Usage = 0;

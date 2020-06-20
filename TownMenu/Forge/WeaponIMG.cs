@@ -8,6 +8,8 @@ public class WeaponIMG : MonoBehaviour
 {
     Image image;
     Button button;
+    Text money;
+
    public void Initialize()
     {
         image = GetComponent<Image>();
@@ -53,6 +55,11 @@ public class WeaponIMG : MonoBehaviour
             case 0:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Weapon/wep0");
+                    Image stone = transform.GetChild(1).GetComponent<Image>();
+                    stone.sprite = Resources.Load<Sprite>("Sprites/wep1");
+                    stone.transform.GetChild(0).GetComponent<Text>().text = "5";
+                    money = transform.GetChild(2).GetComponentInChildren<Text>();
+                    money.text = "1000";
                     if (ResourcesManager.weaponShard < 5 || ResourcesManager.money < 1000)
                         button.interactable = false;
                     else
@@ -63,6 +70,11 @@ public class WeaponIMG : MonoBehaviour
             case 1:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Weapon/wep1");
+                    Image stone = transform.GetChild(1).GetComponent<Image>();
+                    stone.sprite = Resources.Load<Sprite>("Sprites/wep2");
+                    stone.transform.GetChild(0).GetComponent<Text>().text = "5";
+                    money = transform.GetChild(2).GetComponentInChildren<Text>();
+                    money.text = "3000";
                     if (ResourcesManager.weaponChunk < 5 || ResourcesManager.money < 3000)
                         button.interactable = false;
                     else
@@ -72,6 +84,11 @@ public class WeaponIMG : MonoBehaviour
             case 2:
                 {
                     image.sprite = Resources.Load<Sprite>("Sprites/Forge/Weapon/wep2");
+                    Image stone = transform.GetChild(1).GetComponent<Image>();
+                    stone.sprite = Resources.Load<Sprite>("Sprites/wep3");
+                    stone.transform.GetChild(0).GetComponent<Text>().text = "5";
+                    money = transform.GetChild(2).GetComponentInChildren<Text>();
+                    money.text = "5000";
                     if (ResourcesManager.weaponSlab < 5 || ResourcesManager.money < 5000)
                         button.interactable = false;
                     else

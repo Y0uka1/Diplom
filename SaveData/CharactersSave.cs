@@ -37,7 +37,6 @@ public class CharactersSave : ScriptableObject
 
     public List<ICharacterStats> LoadData()
     {
-        Debug.Log(Application.persistentDataPath);
         string json = "";
 
         try

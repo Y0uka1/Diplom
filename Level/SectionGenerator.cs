@@ -30,6 +30,17 @@ public class SectionGenerator : MonoBehaviour
             se.Initialize();
             curPosition = temp.transform.position;
         }
+
+        temp = new GameObject();
+        temp.layer = 10;
+        BoxCollider2D colliderr = temp.AddComponent<BoxCollider2D>();
+        colliderr.size = new Vector2(6, 6);
+        colliderr.isTrigger = true;
+        //temp.layer = 2;
+        LevelEnd see = temp.AddComponent<LevelEnd>();
+        temp.transform.position = new Vector3(curPosition.x + 6.2f, curPosition.y, 20);
+        see.Initialize();
+        
     }
 
     void Start()
